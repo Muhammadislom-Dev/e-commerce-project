@@ -1,0 +1,126 @@
+.footer {
+  padding: 25px 0;
+}
+
+.footer .container {
+  background-image: url("../../assets/img/Futter.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 32px;
+  height: 401px;
+}
+
+.footer-link {
+  color: #fff;
+  font-family: Archivo;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.6000000238418579;
+}
+
+.footer-img {
+  margin-top: 36px;
+  margin-left: 40px;
+}
+
+.footer-items {
+  margin: 15px 10px;
+}
+
+.footer-left {
+  display: flex;
+  gap: 0 30px;
+}
+
+.footer-button {
+  border-radius: 30px;
+  background: var(--foundation-orange-normal, #f26957);
+  width: 150px;
+  height: 50px;
+  color: #fff;
+  font-family: Archivo;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  cursor: pointer;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  width: 444px;
+  height: 58px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--foundation-grey-normal, #232323);
+}
+
+.footer-input {
+  padding: 12px;
+  width: 290px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #fff;
+}
+
+.footer-input::placeholder {
+  color: var(--foundation-grey-light, #e9e9e9);
+  font-family: Archivo;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.footer-name {
+  color: #fff;
+  font-family: Archivo;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+.footer-text {
+  color: var(--foundation-grey-light, #e9e9e9);
+  font-family: Archivo;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 150% */
+  width: 320px;
+}
+
+.footer-list {
+  display: flex;
+}
+
+.footer-right {
+  margin-left: 300px;
+  margin-top: -50px;
+}
+
+.footer-bottom {
+  gap: 18px;
+  display: flex;
+  margin-left: 46px;
+  margin-top: 8px;
+}
+
+.footer-texts {
+  color: #fff;
+  font-family: Archivo;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  opacity: 0.6000000238418579;
+  margin-left: 46px;
+  margin-top: 30px;
+}
