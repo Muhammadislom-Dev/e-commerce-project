@@ -1,0 +1,67 @@
+.card {
+  width: 315px;
+  height: 352px;
+  border-radius: 20px;
+  background: rgb(230, 227, 227);
+  position: relative;
+  font-family: "Archivo", sans-serif;
+}
+
+.card__img {
+  padding-top: 12px;
+  padding-bottom: 16px;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.card__heart {
+  padding: 7px;
+  margin-right: 12px;
+  background: #b2b6beff;
+  border-radius: 50px;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+.card__title {
+  width: 255px;
+  padding-left: 12px;
+  color: var(--foundation-grey-normal, #232323);
+  font-family: Archivo;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.card__subTitle {
+  width: 190px;
+  padding-top: 12px;
+  padding-left: 12px;
+  margin-bottom: 12px;
+  color: var(--foundation-grey-normal, #232323);
+  font-family: Archivo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+.card__link {
+  margin-left: 12px;
+  padding: 4px 16px;
+  border-radius: 40px;
+  background: #ff463a;
+  color: #fff;
+  text-align: center;
+  font-family: Archivo;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.card__cricle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-bottom-right-radius: 20px;
+}
