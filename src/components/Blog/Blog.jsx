@@ -25,7 +25,7 @@ function Blog() {
           </div>
           <div className="blok__section_right">
             <img src={share} alt="share" />
-            <h2 className="blok__right_title">Ulashish</h2>
+            <p >Ulashish</p>
           </div>
         </div>
         <div className="blok__titels">

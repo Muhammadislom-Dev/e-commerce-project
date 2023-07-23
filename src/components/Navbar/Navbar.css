@@ -25,6 +25,7 @@
   font-weight: 400;
   line-height: normal;
   gap: 15px 10px;
+  cursor: pointer;
 }
 
 .navbar-submit {

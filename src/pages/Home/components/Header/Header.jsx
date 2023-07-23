@@ -3,23 +3,44 @@ import "./Header.css";
 import { SearchIcon } from "../../../../assets/icon";
 import { data } from "./data";
 import { Link } from "react-router-dom";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 function Header() {
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
   return (
     <div className="header">
       <div className="container">
         <h1>EHSONNING MUKOFATI EHSON</h1>
         <div className="header-item">
-          <select name="" id="">
-            <option value="Barchasi">Barchasi</option>
-            <option value="Barchasi1">Barchasi1</option>
-            <option value="Barchasi2">Barchasi2</option>
-          </select>
-          <select name="" id="">
-            <option value="Shahar">Shahar</option>
-            <option value="Shahar2">Shahar3</option>
-            <option value="Shahar3">Shahar4</option>
-          </select>
+          <FormControl className="header-select">
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={age}
+              onChange={handleChange}>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className="header-select">
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={age}
+              onChange={handleChange}>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
           <label htmlFor="">
             <img src={SearchIcon} alt="" className="header-icon" />
             <input

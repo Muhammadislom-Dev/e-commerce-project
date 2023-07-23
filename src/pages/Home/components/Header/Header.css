@@ -42,6 +42,19 @@
   margin-left: 12px;
 }
 
+.header .css-1nrlq1o-MuiFormControl-root{
+  width: 220px;
+  margin: 0 5px;
+}
+
+.header .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+  border-radius: 100px;
+  color: var(--foundation-grey-normal, #232323);
+  font-family: Archivo;
+  background: var(--foundation-grey-light, #E9E9E9);
+  outline: none;
+}
+
 .header-item {
   display: flex;
   align-items: center;

@@ -1,4 +1,3 @@
-
 .bloks {
   width: 1010px;
   margin: 0 auto;
@@ -62,11 +61,17 @@
   display: flex;
   align-items: center;
   gap: 7px;
+  color: var(--foundation-grey-normal, #232323);
+  text-align: right;
+  font-family: Archivo;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 21px; 
 }
 
 .blok__right_title {
   color: #232323;
-  text-align: right;
   font-family: Archivo;
   font-size: 14px;
   font-style: normal;

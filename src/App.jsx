@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import BlogAbout from "./pages/Home/components/Blog/Blog";
 import LikePage from "./pages/LikePage/LikePage";
+import AboutProduct from "./pages/AboutProduct/AboutProduct";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -30,6 +32,15 @@ function App() {
             </>
           }
         />
+        <Route
+          path="/products/about"
+          element={
+            <>
+              <AboutProduct />
+            </>
+          }
+        />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </div>
