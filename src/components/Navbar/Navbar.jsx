@@ -27,7 +27,7 @@ function Navbar() {
             <img src={DocumentIcon} alt="" className="navbar-icon" />
             Blog
           </Link>
-          <Link to="/heart" className="navbar-link">
+          <Link to="/like" className="navbar-link">
             <img src={HeartIcon} alt="" className="navbar-icon" />
             Sevimlilar
           </Link>

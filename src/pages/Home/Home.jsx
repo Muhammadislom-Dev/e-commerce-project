@@ -7,8 +7,8 @@ function Home() {
   return (
     <>
       <Header />
-      <Blog />
       <Products />
+      <Blog />
     </>
   );
 }
