@@ -7,6 +7,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useQuery } from "react-query";
+import { fetchRegionData } from "../../../../api";
 
 function Header() {
   const [age, setAge] = React.useState("");
@@ -14,6 +16,16 @@ function Header() {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const { data, isLoading, isError } = useQuery('exampleData', fetchRegionData);
+
+  if (isLoading) {
+    return <p>Yuklanyapti...</p>;
+  }
+
+  if (isError) {
+    return <p>Xatolik yuz berdi.</p>;
+  }
   return (
     <div className="header">
       <div className="container">

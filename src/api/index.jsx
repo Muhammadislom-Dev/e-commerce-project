@@ -30,3 +30,17 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
     .catch((err) => console.log(err));
   return response.data;
 };
+
+export const fetchDistrictData = async () => {
+  const response = await axios.get(
+    `${API_BASE_URL}/district/v1/all?page=0&size=10`
+  );
+  return response.data;
+};
+
+export const fetchRegionData = async () => {
+  const response = await axios.get(
+    `${API_BASE_URL}/region/v1/all?page=0&size=10`
+  );
+  return response.data;
+};
