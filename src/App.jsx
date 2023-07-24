@@ -8,12 +8,14 @@ import BlogAbout from "./pages/Home/components/Blog/Blog";
 import LikePage from "./pages/LikePage/LikePage";
 import AboutProduct from "./pages/AboutProduct/AboutProduct";
 import Profile from "./pages/Profile/Profile";
+import AppRoutes from "./routes";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Routes>
+      <AppRoutes />
+      {/* <Routes>
         <Route path="/" element={<Home />} />
         <Route
           path="/blog"
@@ -41,7 +43,7 @@ function App() {
           }
         />
         <Route path="/profile" element={<Profile />} />
-      </Routes>
+      </Routes> */}
       <Footer />
     </div>
   );
