@@ -20,7 +20,7 @@ export const PhoneSmsCode = async (userData) => {
   const response = await axios
     .post(`${API_BASE_URL}/auth/v1/verify`, userData)
     .then((res) => {
-      localStorage.setItem("token", `${res?.data?.objectKoinot?.accessToken}`);
+      localStorage.setItem("accessToken", `${res?.data?.objectKoinot?.accessToken}`);
       if (res?.data?.message === "successful") {
         navigate("/profile");
       }
