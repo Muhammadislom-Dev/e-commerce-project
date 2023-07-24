@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import { SearchIcon } from "../../../../assets/icon";
 import { data } from "./data";
@@ -8,24 +8,47 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useQuery } from "react-query";
-import { fetchRegionData } from "../../../../api";
+import { fetchDistrictData, fetchRegionData } from "../../../../api";
+import { Box, CircularProgress } from "@mui/material";
 
 function Header() {
-  const [age, setAge] = React.useState("");
-
+  const [age, setAge] = React.useState("Andijon");
+  const [code, setCode] = useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
+    setCode(event.target.value);
   };
 
-  const { data, isLoading, isError } = useQuery('exampleData', fetchRegionData);
+  const {
+    data: region,
+    isLoading,
+    isError,
+  } = useQuery("exampleData", fetchRegionData);
+
+  const { data: district } = useQuery(
+    "exampleDistrict",
+    fetchDistrictData(code)
+  );
 
   if (isLoading) {
-    return <p>Yuklanyapti...</p>;
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
   }
 
   if (isError) {
     return <p>Xatolik yuz berdi.</p>;
   }
+
   return (
     <div className="header">
       <div className="container">
@@ -37,9 +60,11 @@ function Header() {
               id="demo-simple-select"
               value={age}
               onChange={handleChange}>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {region.objectKoinot.content.map((data) => (
+                <MenuItem key={data.id} value={data.id}>
+                  {data.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl className="header-select">
@@ -63,7 +88,7 @@ function Header() {
           </label>
         </div>
         <div className="header-list">
-          {data.map((data) => (
+          {data?.map((data) => (
             <Link key={data.id} to="/" className="header-link">
               <img src={data.img} alt="" className="header-icons" />
               <p className="header-subname">{data.title}</p>

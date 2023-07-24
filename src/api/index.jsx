@@ -31,16 +31,16 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
   return response.data;
 };
 
-export const fetchDistrictData = async () => {
+export const fetchRegionData = async () => {
   const response = await axios.get(
-    `${API_BASE_URL}/district/v1/all?page=0&size=10`
+    `${API_BASE_URL}/region/v1/all?page=0&size=10`
   );
   return response.data;
 };
 
-export const fetchRegionData = async () => {
+export const fetchDistrictData = async (code) => {
   const response = await axios.get(
-    `${API_BASE_URL}/region/v1/all?page=0&size=10`
+    `${API_BASE_URL}/district/v1/all?page=0&regionId=${code}&size=10`
   );
   return response.data;
 };
