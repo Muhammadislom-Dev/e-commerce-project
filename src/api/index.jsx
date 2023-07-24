@@ -29,3 +29,12 @@ export const PhoneSmsCode = async (userData) => {
     .catch((err) => console.log(err));
   return response.data;
 };
+
+// export const createProduct = async (data, setResponse) => {
+//   const response = await axios.post(`${API_BASE_URL}`);
+// };
+
+export const getCategory = async () => {
+  const response = await axios.get(`${API_BASE_URL}/category/v1`);
+  return response.data;
+};

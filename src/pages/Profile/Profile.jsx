@@ -7,6 +7,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Announcement from "./components/Announcement/Announcement";
+import ProductCreate from "./components/ProductCreate/ProductCreate";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -17,7 +18,8 @@ function CustomTabPanel(props) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}>
+      {...other}
+    >
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
@@ -69,7 +71,8 @@ function Profile() {
               <Tabs
                 value={value}
                 onChange={handleChange}
-                aria-label="basic tabs example">
+                aria-label="basic tabs example"
+              >
                 <Tab label="E’LONLARIM" {...a11yProps(0)} />
                 <Tab label="E’LON QO’SHISH" {...a11yProps(1)} />
                 <Tab label="SOZLAMALAR" {...a11yProps(2)} />
@@ -79,7 +82,7 @@ function Profile() {
               <Announcement />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-              E’LON QO’SHISH
+              <ProductCreate />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
               SOZLAMALAR
