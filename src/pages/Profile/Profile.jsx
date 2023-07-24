@@ -6,6 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Announcement from "./components/Announcement/Announcement";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,7 +76,7 @@ function Profile() {
               </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-              E’LONLARIM
+              <Announcement />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
               E’LON QO’SHISH
