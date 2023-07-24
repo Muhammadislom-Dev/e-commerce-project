@@ -66,7 +66,11 @@ export default function LoginModal() {
                 </button>
               </div>
 
-              {login === "Kirish" ? <Login /> : <Register />}
+              {login === "Kirish" ? (
+                <Login handleClose={handleClose} />
+              ) : (
+                <Register handleClose={handleClose} />
+              )}
             </div>
             <div className="modal-right">
               <img src={LoginImage} className="modal-img" alt="" />

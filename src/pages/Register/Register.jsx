@@ -4,7 +4,7 @@ import "./Register.css";
 import { registerUser } from "../../api";
 import SmsCode from "../SmsCode/SmsCode";
 
-function Register() {
+function Register({ handleClose }) {
   const [formData, setFormData] = useState({
     phoneNumber: "",
   });
@@ -24,7 +24,7 @@ function Register() {
   return (
     <>
       {code === true ? (
-        <SmsCode phoneNumber={formData.phoneNumber} />
+        <SmsCode handleClose={handleClose} phoneNumber={formData.phoneNumber} />
       ) : (
         <div>
           <h3 className="register-name">Ro‘yhatdan o‘tish</h3>
