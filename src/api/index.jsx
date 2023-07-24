@@ -14,7 +14,7 @@ export const registerUser = async (userData, setCode) => {
   return response.data;
 };
 
-export const PhoneSmsCode = async (userData) => {
+export const PhoneSmsCode = async (userData, navigate, handleClose) => {
   const response = await axios
     .post(`${API_BASE_URL}/auth/v1/verify`, userData)
     .then((res) => {
@@ -22,13 +22,15 @@ export const PhoneSmsCode = async (userData) => {
         "accessToken",
         `${res?.data?.objectKoinot?.accessToken}`
       );
-      //   if (res?.data?.message === "successful") {
-      //     navigate("/profile");
-      //   }
+      if (res?.data?.message === "successful") {
+        navigate("/profile");
+        handleClose();
+      }
     })
     .catch((err) => console.log(err));
   return response.data;
 };
+
 
 // export const createProduct = async (data, setResponse) => {
 //   const response = await axios.post(`${API_BASE_URL}`);
@@ -36,5 +38,17 @@ export const PhoneSmsCode = async (userData) => {
 
 export const getCategory = async () => {
   const response = await axios.get(`${API_BASE_URL}/category/v1`);
+
+export const fetchRegionData = async () => {
+  const response = await axios.get(
+    `${API_BASE_URL}/region/v1/all?page=0&size=10`
+  );
+  return response.data;
+};
+
+export const fetchDistrictData = async (code) => {
+  const response = await axios.get(
+    `${API_BASE_URL}/district/v1/all?page=0&regionId=${code}&size=10`
+  )
   return response.data;
 };

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { PhoneSmsCode } from "../../api";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
-function SmsCode({ phoneNumber }) {
+function SmsCode({ phoneNumber, handleClose }) {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({
     token: token,
     phoneNumber: phoneNumber,
     code: "",
   });
-  const mutation = useMutation((userData) => PhoneSmsCode(userData));
+  const mutation = useMutation((userData) =>
+    PhoneSmsCode(userData, navigate, handleClose)
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
