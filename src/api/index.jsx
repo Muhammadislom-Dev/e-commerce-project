@@ -31,6 +31,14 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
   return response.data;
 };
 
+
+// export const createProduct = async (data, setResponse) => {
+//   const response = await axios.post(`${API_BASE_URL}`);
+// };
+
+export const getCategory = async () => {
+  const response = await axios.get(`${API_BASE_URL}/category/v1`);
+
 export const fetchRegionData = async () => {
   const response = await axios.get(
     `${API_BASE_URL}/region/v1/all?page=0&size=10`
@@ -41,6 +49,6 @@ export const fetchRegionData = async () => {
 export const fetchDistrictData = async (code) => {
   const response = await axios.get(
     `${API_BASE_URL}/district/v1/all?page=0&regionId=${code}&size=10`
-  );
+  )
   return response.data;
 };
