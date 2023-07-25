@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PhoneSmsCode } from "../../api";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { Box, CircularProgress } from "@mui/material";
 
 function SmsCode({ phoneNumber, handleClose }) {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function SmsCode({ phoneNumber, handleClose }) {
     phoneNumber: phoneNumber,
     code: "",
   });
-  const mutation = useMutation((userData) =>
+  const { mutate, isLoading } = useMutation((userData) =>
     PhoneSmsCode(userData, navigate, handleClose)
   );
 
@@ -22,8 +23,23 @@ function SmsCode({ phoneNumber, handleClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate(formData);
+    mutate(formData);
   };
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
+  }
 
   return (
     <div>

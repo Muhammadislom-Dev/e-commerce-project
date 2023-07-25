@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 const API_BASE_URL = "http://64.227.105.70:1777/api"; // API ning manzili
 
 // Register uchun POST so'rov yuborish uchun funktsiya
@@ -22,10 +23,12 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
         "accessToken",
         `${res?.data?.objectKoinot?.accessToken}`
       );
-      if (res?.data?.message === "successful") {
-        navigate("/profile");
-        handleClose();
-      }
+      <Navigate to="/profile" replace />;
+      window.location.reload();
+      handleClose();
+      // if (res?.data?.message === "successful") {
+      //   handleClose();
+      // }
     })
     .catch((err) => console.log(err));
   return response.data;

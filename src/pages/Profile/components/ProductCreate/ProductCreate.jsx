@@ -66,7 +66,7 @@ export default function ProductCreate() {
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
             >
-              {data?.objectKoinot.length ? (
+              {data?.objectKoinot?.length ? (
                 data?.objectKoinot?.map((el, index) => (
                   <MenuItem key={index} value={el?.id}>
                     {el?.nameUz}

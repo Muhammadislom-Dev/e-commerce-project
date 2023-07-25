@@ -8,6 +8,7 @@ import "./Modal.css";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
 import { LoginImage } from "../../assets/img";
+import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -23,17 +24,25 @@ const style = {
 };
 
 export default function LoginModal() {
+  const token = localStorage.getItem("accessToken");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [login, setLogin] = React.useState("Kirish");
 
   return (
-    <div>
-      <div onClick={handleOpen} className="navbar-link">
-        <img src={UserIcon} alt="" className="navbar-icon" />
-        Kirish
-      </div>
+    <>
+      {token ? (
+        <Link to="/profile" className="navbar-profile">
+          <img src={UserIcon} alt="" className="navbar-icon" />
+          Hisobingiz
+        </Link>
+      ) : (
+        <div onClick={handleOpen} className="navbar-link">
+          <img src={UserIcon} alt="" className="navbar-icon" />
+          Kirish
+        </div>
+      )}
       <Modal
         open={open}
         onClose={handleClose}
@@ -78,6 +87,6 @@ export default function LoginModal() {
           </div>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
