@@ -37,7 +37,32 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
 
 export const getCategory = async () => {
   const response = await axios.get(`${API_BASE_URL}/category/v1`);
-  return response;
+  return response.data;
+};
+
+export const uploadImage = async (image) => {
+  console.log(localStorage.getItem("accessToken"));
+  const response = await axios.post(
+    `${API_BASE_URL}/attachment/v1/upload-photo`,
+    image,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getSetupData = async () => {
+  const response = await axios.get(`${API_BASE_URL}/auth/v1/me`, {
+    headers: {
+      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  console.log(response);
+  return response.data;
 };
 
 export const fetchRegionData = async () => {

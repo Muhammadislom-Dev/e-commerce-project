@@ -1,21 +1,61 @@
 import "./ProductCreate.css";
 import { BsPlusCircle } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useQuery } from "react-query";
-import { getCategory } from "../../../../api";
+import { useMutation, useQuery } from "react-query";
+import { getCategory, uploadImage } from "../../../../api";
 
 export default function ProductCreate() {
   const [imgBox, setimageBox] = useState([]);
   const [category, setCategory] = useState(1);
-  const [subCategory, setSubCategory] = useState(2);
+  const [subCategory, setSubCategory] = useState([]);
+  const [product, setProduct] = useState({
+    categoryId: 2,
+    active: true,
+    delete: true,
+    top: true,
+    photosId: [],
+  });
+
+  const mutation = useMutation((post) => uploadImage(post), {
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   const { data } = useQuery("category", getCategory);
+
+  useEffect(() => {
+    const id = data?.objectKoinot[0]?.id;
+    setCategory(id);
+
+    const children = data?.objectKoinot?.find((el) => el.id === id)?.children;
+    setSubCategory(children);
+    console.log(data);
+  }, [data]);
+
+  const handleChange = (e) => {
+    setCategory(e.target.value);
+    const children = data?.objectKoinot?.find(
+      (el) => el.id === e.target.value
+    )?.children;
+    setSubCategory(children);
+    if (children?.length)
+      setProduct((state) => ({
+        ...state,
+        categoryId: children[0].id,
+      }));
+    else
+      setProduct((state) => ({
+        ...state,
+        categoryId: 1,
+      }));
+  };
 
   return (
     <div>
@@ -37,9 +77,10 @@ export default function ProductCreate() {
               type="file"
               id="create-product-img"
               accept="image/*"
-              onChange={(e) =>
-                setimageBox((state) => [...state, e.target.files[0]])
-              }
+              onChange={(e) => {
+                setimageBox((state) => [...state, e.target.files[0]]);
+                mutation.mutate({ key: e.target.files[0] });
+              }}
             />
           </label>
         </div>
@@ -51,22 +92,44 @@ export default function ProductCreate() {
       <form className="product-create-form" onSubmit={handleSubmit}>
         <label className="product-create-label">
           <h4>Sarlavha</h4>
-          <input type="text" maxLength={500} min={3} required />
+          <input
+            onChange={(e) =>
+              setProduct((state) => ({
+                ...state,
+                name: e.target.value,
+              }))
+            }
+            type="text"
+            maxLength={500}
+            min={3}
+            required
+          />
         </label>
         <label className="product-create-label">
           <h4>Tovar haqida</h4>
-          <textarea rows="10" maxLength={500} min={3} required></textarea>
+          <textarea
+            onChange={(e) =>
+              setProduct((state) => ({
+                ...state,
+                description: e.target.value,
+              }))
+            }
+            rows="10"
+            maxLength={500}
+            min={3}
+            required
+          ></textarea>
         </label>
         <label className="product-create-label">
           <h4>Kategoriya</h4>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={handleChange}
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
             >
-              {data?.objectKoinot.length ? (
+              {data?.objectKoinot?.length ? (
                 data?.objectKoinot?.map((el, index) => (
                   <MenuItem key={index} value={el?.id}>
                     {el?.nameUz}
@@ -82,37 +145,72 @@ export default function ProductCreate() {
           <h4>Subkategoriya</h4>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select
-              value={subCategory}
-              onChange={(e) => setSubCategory(e.target.value)}
+              value={product.categoryId}
+              onChange={(e) =>
+                setProduct((state) => ({
+                  ...state,
+                  categoryId: e.target.value,
+                }))
+              }
               displayEmpty
               inputProps={{ "aria-label": "Without label" }}
             >
-              {data?.objectKoinot.length ? (
-                data?.objectKoinot
-                  .find((el) => el.id === category)
-                  ?.children?.map((el) => (
+              {subCategory?.length
+                ? subCategory.map((el) => (
                     <MenuItem key={el.id} value={el?.id}>
                       {el?.nameUz}
                     </MenuItem>
                   ))
-              ) : (
-                <MenuItem value={1}>Erkaklar</MenuItem>
-              )}
+                : null}
             </Select>
           </FormControl>
         </label>
         <label className="product-create-label">
-          <h4>Ismingiz</h4>
-          <input type="text" maxLength={500} min={3} required />
+          <h4>Telefon raqamingiz</h4>
+          <input
+            onChange={(e) =>
+              setProduct((state) => ({
+                ...state,
+                phoneNumber: e.target.value,
+              }))
+            }
+            type="number"
+            maxLength={500}
+            min={3}
+            required
+          />
         </label>
         <label className="product-create-label">
-          <h4>Telefon raqamingiz</h4>
-          <input type="text" maxLength={500} min={3} required />
+          <h4>Narxi</h4>
+          <input
+            onChange={(e) =>
+              setProduct((state) => ({
+                ...state,
+                price: e.target.value,
+              }))
+            }
+            type="text"
+            maxLength={500}
+            min={3}
+            required
+          />
         </label>
         <label className="product-create-label">
           <h4>Manzil</h4>
-          <input type="text" maxLength={500} min={3} required />
+          <input
+            onChange={(e) =>
+              setProduct((state) => ({
+                ...state,
+                address: e.target.value,
+              }))
+            }
+            type="text"
+            maxLength={500}
+            min={3}
+            required
+          />
         </label>
+
         <button className="product-create-form-button" type="submit">
           Joylashtirish
         </button>

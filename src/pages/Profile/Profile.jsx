@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Announcement from "./components/Announcement/Announcement";
 import ProductCreate from "./components/ProductCreate/ProductCreate";
+import Setup from "./components/Setup/Setup";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -85,7 +86,7 @@ function Profile() {
               <ProductCreate />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-              SOZLAMALAR
+              <Setup />
             </CustomTabPanel>
           </Box>
         </div>
