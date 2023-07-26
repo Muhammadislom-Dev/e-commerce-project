@@ -3,9 +3,29 @@ import qaychi from "../../../../assets/qaychi.png";
 import ball from "../../../../assets/ball.png";
 import "./Products.css";
 import Card from "../../../../components/Card/Card";
+import { getProductData } from "../../../../api";
+import { useQuery } from "react-query";
+import { Box, CircularProgress } from "@mui/material";
 
 function Products() {
   const [popular, setPopular] = useState("YANGILARI");
+  const { data, isLoading, isError } = useQuery("productData", getProductData);
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
+  }
+
   return (
     <div className="container">
       <div className="product-list">
@@ -32,12 +52,15 @@ function Products() {
       </div>
       {popular === "YANGILARI" ? (
         <div className="products">
-          <Card title="Bog’ingiz uchun jihozalar" img={qaychi} link="Eski" />
+          {data.content.map((evt, index) => (
+            <Card data={evt} key={index} />
+          ))}
         </div>
       ) : (
         <div className="products">
-          <Card title="Bog’ingiz uchun jihozalar" img={qaychi} link="Eski" />
-          <Card title="Bolalaringiz uchun koptok" img={ball} link="O’rtacha" />
+          {data.content.map((evt, index) => (
+            <Card data={evt} key={index} />
+          ))}
         </div>
       )}
     </div>

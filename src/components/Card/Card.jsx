@@ -1,27 +1,69 @@
 import React from "react";
 import circle from "../../assets/cricle.png";
-import heart from "../../assets/heart.png";
+import heart from "../../assets/heart.svg";
+import headerLike from "../../assets/img/heart.svg";
 import "./Card.css";
 import { Link } from "react-router-dom";
+import { useMutation } from "react-query";
+import { likeProductPost } from "../../api";
+import { Box, CircularProgress } from "@mui/material";
 
-const Card = (props) => {
+const Card = ({ data, key }) => {
+  const { isLoading, isError, mutate } = useMutation((productId) =>
+    likeProductPost(productId)
+  );
+
+  const handleLike = () => {
+    mutate(data.id);
+  };
+
+  
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
+  }
   return (
     <>
-      <div className="card">
-        <img src={props?.img} alt="tvSet" className="card__img" />
-        <a href="#">
-          <img src={heart} alt="heart" className="card__heart" />
-        </a>
+      <div key={key} className="card">
+        <img
+          src={data?.photos[0]?.filePath}
+          alt="tvSet"
+          className="card__img"
+        />
+        <button onClick={handleLike} className="card-heart">
+          <img src={headerLike} alt="heart" className="card__heart" />
+          {/* {data.active === true ? (
+            <img src={heart} alt="heart" className="card__heart" />
+          ) : (
+            <img src={headerLike} alt="heart" className="card__heart" />
+          )} */}
+        </button>
 
-        <Link className="card-link" to="/products/about">
-          <h2 className="card__title">{props?.title}</h2>
+        <Link className="card-link" to={`/products/about/${data?.id}`}>
+          <h2 className="card__title">{data?.name}</h2>
           <p className="card__subTitle">
-            Toshkent, Mirzo ulu’bek tumani Bugun 13:11
+            {data?.region?.name}, {data?.district?.name} tumani Bugun 13:11
           </p>
         </Link>
-        <a href="#" className="card__link">
-          {props?.link}
-        </a>
+        {data?.quality === "NEW" ? (
+          <span className="card__link card__new">Yangi</span>
+        ) : data?.quality === "TOP" ? (
+          <span className="card__link card__medium">O'rtacha</span>
+        ) : data?.quality === "AVERAGE" ? (
+          <span className="card__link">Eski</span>
+        ) : (
+          ""
+        )}
         <img src={circle} alt="cricle" className="card__cricle" />
       </div>
     </>

@@ -4,8 +4,30 @@ import Products from "../Home/components/Products/Products";
 import Card from "../../components/Card/Card";
 import qaychi from "../../assets/qaychi.png";
 import "./LikePage.css";
+import { useQuery } from "react-query";
+import { getLikeProductData } from "../../api";
+import { Box, CircularProgress } from "@mui/material";
 
 function LikePage() {
+  // const { data, isLoading } = useQuery("exampleProduct", getLikeProductData);
+  const { data, isLoading, isError } = useQuery(() => getLikeProductData());
+
+  console.log(data);
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
+  }
   return (
     <div>
       <Like />

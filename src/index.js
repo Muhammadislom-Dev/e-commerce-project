@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
+import "./i18n";
 
 const queryClient = new QueryClient();
 

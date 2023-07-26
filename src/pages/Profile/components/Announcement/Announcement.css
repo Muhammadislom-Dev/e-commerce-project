@@ -2,10 +2,15 @@
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 48px 0;
+  gap: 20px;
+}
+
+.announcement {
+  margin-left: -35px;
 }
 
 .announcement-card {
-  width: 426px;
+  width: 400px;
   display: flex;
   align-items: center;
   padding: 12px;
@@ -23,6 +28,12 @@
   font-weight: 500;
   line-height: 24px;
   margin-top: -4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .card__right_subTitle {
@@ -99,6 +110,11 @@
   padding-top: 2px;
   padding-bottom: 2.5px;
   cursor: pointer;
+}
+
+.announcement-picture {
+  width: 148px;
+  height: 163px;
 }
 
 .card__left__check:active {

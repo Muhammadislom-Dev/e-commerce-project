@@ -12,8 +12,55 @@ import right from "../../assets/right.svg";
 import "./AboutProduct.css";
 import Card from "../../components/Card/Card";
 import qaychi from "../../assets/qaychi.png";
+import { useParams } from "react-router-dom";
+import {
+  getByIdCategoryData,
+  getByIdProductData,
+  getProductData,
+} from "../../api";
+import { useQuery } from "react-query";
+import { Box, CircularProgress } from "@mui/material";
 
 function AboutProduct() {
+  const { id } = useParams();
+  const { data, isLoading, isError } = useQuery(["product", id], () =>
+    getByIdProductData(id)
+  );
+  const category = data?.category?.id;
+  const { data: product } = useQuery("productData", getProductData);
+  const { data: categoryData } = useQuery(["category", category], () =>
+    getByIdCategoryData(category)
+  );
+
+  function formatSecondsToDateString(seconds) {
+    const date = new Date(seconds * 1000);
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return date.toLocaleDateString("en-US", options);
+  }
+
+  const seconds = data?.user?.lastOnline / 1000; // 1690350791.702  uploadedAt
+  const formattedDate = formatSecondsToDateString(seconds);
+
+  const secondDate = data?.uploadedAt / 1000; // 1690350791.702  uploadedAt
+  const formatUpdateDate = formatSecondsToDateString(secondDate);
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
+  }
+
+  console.log(category);
+
   return (
     <>
       <div className="container">
@@ -22,22 +69,22 @@ function AboutProduct() {
             <img src={duvoyka} alt="duvoyka" className="blok__left_img" />
           </div>
           <div className="blok__right">
-            <h1 className="blok__right_title">
-              Erkaklar uchun yozgi ko‘ylak holati o‘rtacha
-            </h1>
-            <p className="blok__right_subTitle">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged.
-            </p>
+            <h1 className="blok__right_title">{data.name}</h1>
+            <p className="blok__right_subTitle">{data.description}</p>
 
             <div className="blok__right_icons">
-              <a href="#" className="icons__link">
+              {/* <a href="#" className="icons__link">
                 O’rtacha
-              </a>
+              </a> */}
+              {data?.quality === "NEW" ? (
+                <span className="icons__link card__new">Yangi</span>
+              ) : data?.quality === "TOP" ? (
+                <span className="icons__link card__medium">O'rtacha</span>
+              ) : data?.quality === "AVERAGE" ? (
+                <span className="icons__link">Eski</span>
+              ) : (
+                ""
+              )}
               <div className="icons__oblast">
                 <img
                   src={location}
@@ -45,7 +92,7 @@ function AboutProduct() {
                   className="icons__oblast_location"
                 />
                 <p className="icons__oblast_subTitle">
-                  Toshkent, Mirzo ulug’bek tumani
+                  {data.region.name}, {data.district.name} tumani
                 </p>
               </div>
               <div className="icons__oblast">
@@ -54,11 +101,11 @@ function AboutProduct() {
                   alt="clock"
                   className="icons__oblast_location"
                 />
-                <p className="icons__oblast_subTitle">21:30 | 17.05.2023</p>
+                <p className="icons__oblast_subTitle">{formatUpdateDate}</p>
               </div>
               <div className="icons__oblast">
                 <img src={eye} alt="eye" className="icons__oblast_location" />
-                <p className="icons__oblast_subTitle">186 +</p>
+                <p className="icons__oblast_subTitle">{data.see} +</p>
               </div>
             </div>
             <div className="blok__right_call">
@@ -69,7 +116,9 @@ function AboutProduct() {
                 <img src={children} alt="children" />
                 <div className="call__children_orderer">
                   <h4 className="orderer_title">E’lon beruvchi</h4>
-                  <p className="orderer_subTitle">So’ngi faolligi 12.06.2023</p>
+                  <p className="orderer_subTitle">
+                    So’ngi faolligi {formattedDate}
+                  </p>
                 </div>
               </div>
             </div>
@@ -95,7 +144,9 @@ function AboutProduct() {
             <button className="about-button">BOSHQA E’LONLARI</button>
           </div>
           <div className="products">
-            <Card title="Bog’ingiz uchun jihozalar" img={qaychi} link="Eski" />
+            {product?.content?.map((evt, index) => (
+              <Card data={evt} key={index} />
+            ))}
           </div>
           <button className="about-more">Barchasini ko‘rish</button>
         </div>
@@ -107,7 +158,9 @@ function AboutProduct() {
             <button className="about-button">O‘XSHASH E’LONLAR</button>
           </div>
           <div className="products">
-            <Card title="Bog’ingiz uchun jihozalar" img={qaychi} link="Eski" />
+            {categoryData?.content?.map((evt, index) => (
+              <Card data={evt} key={index} />
+            ))}
           </div>
         </div>
       </div>

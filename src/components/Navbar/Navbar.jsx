@@ -9,6 +9,7 @@ import {
 } from "../../assets/icon";
 import { Link } from "react-router-dom";
 import LoginModal from "../Modal/Modal";
+import Language from "../Language/Language";
 
 function Navbar() {
   return (
@@ -32,6 +33,7 @@ function Navbar() {
             <img src={HeartIcon} alt="" className="navbar-icon" />
             Sevimlilar
           </Link>
+          <Language />
           <LoginModal />
           <Link to="/profile" className="navbar-submit">
             E’lon berish

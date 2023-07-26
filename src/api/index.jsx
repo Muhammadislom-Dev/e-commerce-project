@@ -79,3 +79,66 @@ export const fetchDistrictData = async (code, setData) => {
   );
   return response.data;
 };
+
+export const getProductData = async () => {
+  const response = await axios.get(`${API_BASE_URL}/product/v1?page=0&size=20`, {
+    headers: {
+      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  return response.data;
+};
+
+export const deleteProduct = async (id) => {
+  const response = await axios.delete(`${API_BASE_URL}/product/v1/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  return response.data;
+};
+
+export const likeProductPost = async (id) => {
+  const response = await axios.post(
+    `${API_BASE_URL}/basket-favourite-product/v1/favourites-save-remove?productId=${id}&searchType=WEB`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getLikeProductData = async () => {
+  const response = await axios.get(
+    `${API_BASE_URL}/basket-favourite-product/v1/favourites?page=0&size=10`,
+    {
+      headers: {
+        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getByIdProductData = async (id) => {
+  const response = await axios.get(`${API_BASE_URL}/product/v1/${id}`, {
+    headers: {
+      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  return response.data;
+};
+
+export const getByIdCategoryData = async (id) => {
+  const response = await axios.get(
+    `${API_BASE_URL}/product/v1?category=${id}&page=0&size=100`,
+    {
+      headers: {
+        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+  return response.data;
+};

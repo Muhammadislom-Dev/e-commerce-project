@@ -32,7 +32,7 @@ function AppRoutes() {
           }
         />
         <Route
-          path="/products/about"
+          path="/products/about/:id"
           element={
             <>
               <AboutProduct />
