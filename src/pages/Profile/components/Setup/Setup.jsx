@@ -3,19 +3,23 @@ import "./Setup.css";
 import defaultImg from "../../../../assets/img/default-profile-img.png";
 import { FaCamera } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import { useQuery } from "react-query";
-import { getSetupData } from "../../../../api";
+import { useMutation, useQuery } from "react-query";
+import { getSetupData, uploadImage } from "../../../../api";
 
 export default function Setup() {
   const [data, setData] = useState({ img: null });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
   };
 
+  const mutation = useMutation((post) => uploadImage(post), {
+    onSuccess: (data) => {
+      console.log(data.objectKoinot[0].id);
+    },
+  });
+
   const userData = useQuery("user data", getSetupData);
-  console.log(userData);
 
   return (
     <div className="setup">
@@ -34,27 +38,69 @@ export default function Setup() {
             type="file"
             id="setup-profile-img"
             accept="image/*"
-            onChange={(e) =>
-              setData((state) => ({
-                ...state,
-                img: e.target.files[0],
-              }))
-            }
+            onChange={(e) => {
+              mutation.mutate({ key: e.target.files[0] });
+            }}
           />
           <span>Rasm yuklash</span>
         </label>
       </div>
       <form className="product-create-form" onSubmit={handleSubmit}>
         <label className="product-create-label">
-          <h4>Ismingiz</h4>
+          <h4>First Name</h4>
           <input
             onChange={(e) =>
               setData((state) => ({
                 ...state,
-                name: e.target.value,
+                firstname: e.target.value,
               }))
             }
             type="text"
+            maxLength={500}
+            min={3}
+            required
+          />
+        </label>
+        <label className="product-create-label">
+          <h4>Last Name</h4>
+          <input
+            onChange={(e) =>
+              setData((state) => ({
+                ...state,
+                lastname: e.target.value,
+              }))
+            }
+            type="text"
+            maxLength={500}
+            min={3}
+            required
+          />
+        </label>
+        <label className="product-create-label">
+          <h4>Password</h4>
+          <input
+            onChange={(e) =>
+              setData((state) => ({
+                ...state,
+                password: e.target.value,
+              }))
+            }
+            type="password"
+            maxLength={500}
+            min={3}
+            required
+          />
+        </label>
+        <label className="product-create-label">
+          <h4>Old Password</h4>
+          <input
+            onChange={(e) =>
+              setData((state) => ({
+                ...state,
+                oldpassword: e.target.value,
+              }))
+            }
+            type="password"
             maxLength={500}
             min={3}
             required
@@ -70,21 +116,6 @@ export default function Setup() {
               }))
             }
             type="number"
-            maxLength={500}
-            min={3}
-            required
-          />
-        </label>
-        <label className="product-create-label">
-          <h4>E-mail</h4>
-          <input
-            onChange={(e) =>
-              setData((state) => ({
-                ...state,
-                name: e.target.value,
-              }))
-            }
-            type="email"
             maxLength={500}
             min={3}
             required

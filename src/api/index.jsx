@@ -26,9 +26,7 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
       <Navigate to="/profile" replace />;
       window.location.reload();
       handleClose();
-      // if (res?.data?.message === "successful") {
-      //   handleClose();
-      // }
+    
     })
     .catch((err) => console.log(err));
   return response.data;
@@ -44,7 +42,6 @@ export const getCategory = async () => {
 };
 
 export const uploadImage = async (image) => {
-  console.log(localStorage.getItem("accessToken"));
   const response = await axios.post(
     `${API_BASE_URL}/attachment/v1/upload-photo`,
     image,
@@ -64,7 +61,6 @@ export const getSetupData = async () => {
       Authorization: `Barear ${localStorage.getItem("accessToken")}`,
     },
   });
-  console.log(response);
   return response.data;
 };
 

@@ -117,8 +117,7 @@ export default function ProductCreate() {
             rows="10"
             maxLength={500}
             min={3}
-            required
-          ></textarea>
+            required></textarea>
         </label>
         <label className="product-create-label">
           <h4>Kategoriya</h4>
@@ -127,8 +126,7 @@ export default function ProductCreate() {
               value={category}
               onChange={handleChange}
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
+              inputProps={{ "aria-label": "Without label" }}>
               {data?.objectKoinot?.length ? (
                 data?.objectKoinot?.map((el, index) => (
                   <MenuItem key={index} value={el?.id}>
@@ -142,26 +140,12 @@ export default function ProductCreate() {
           </FormControl>
         </label>
         <label className="product-create-label">
-          <h4>Subkategoriya</h4>
+          <h4>Product Holati</h4>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <Select
-              value={product.categoryId}
-              onChange={(e) =>
-                setProduct((state) => ({
-                  ...state,
-                  categoryId: e.target.value,
-                }))
-              }
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
-              {subCategory?.length
-                ? subCategory.map((el) => (
-                    <MenuItem key={el.id} value={el?.id}>
-                      {el?.nameUz}
-                    </MenuItem>
-                  ))
-                : null}
+            <Select displayEmpty inputProps={{ "aria-label": "Without label" }}>
+              <MenuItem value="AVERAGE">AVERAGE</MenuItem>
+              <MenuItem value="NEW">NEW</MenuItem>
+              <MenuItem value="TOP">TOP</MenuItem>
             </Select>
           </FormControl>
         </label>
