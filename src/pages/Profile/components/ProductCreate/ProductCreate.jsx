@@ -5,71 +5,84 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useMutation, useQuery } from "react-query";
-import { getCategory, uploadImage } from "../../../../api";
+import {
+  createProduct,
+  fetchDistrictData,
+  fetchRegionData,
+  getCategory,
+  uploadImage,
+} from "../../../../api";
+import ProductModal from "../ProductModal/ProductModal";
 
 export default function ProductCreate() {
   const [imgBox, setimageBox] = useState([]);
-  const [category, setCategory] = useState(1);
-  const [subCategory, setSubCategory] = useState([]);
+  const [activeModal, setActiveModal] = useState(false);
   const [product, setProduct] = useState({
-    categoryId: 2,
+    categoryId: 1,
     active: true,
     delete: true,
     top: true,
     photosId: [],
+    productQuality: "AVERAGE",
+    regionId: 1,
+    districtId: 1,
   });
 
   const mutation = useMutation((post) => uploadImage(post), {
     onSuccess: (data) => {
-      console.log(data);
+      setProduct((state) => ({
+        ...state,
+        photosId: [...state.photosId, data.objectKoinot[0]?.id],
+      }));
+    },
+    onError: (error) => alert(error?.message),
+  });
+
+  const productMutation = useMutation((data) => createProduct(data), {
+    onSuccess: (data) => {
+      setActiveModal(true);
+    },
+    onError: (error) => {
+      alert(error.message);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    productMutation.mutate(product);
   };
   const { data } = useQuery("category", getCategory);
+  const region = useQuery("regionId", fetchRegionData);
+  const district = useQuery("districtId", () =>
+    fetchDistrictData(product.regionId)
+  );
+  useEffect(() => {
+    district.refetch();
+  }, [product.regionId]);
 
-  // useEffect(() => {
-  //   const id = data?.objectKoinot[0]?.id;
-  //   setCategory(id);
-
-  //   // const children = data?.objectKoinot?.find((el) => el.id === id)?.children;
-  //   // setSubCategory(children);
-  //   console.log(data);
-  // }, [data]);
-
-  const handleChange = (e) => {
-    // setCategory(e.target.value);
-    const children = data?.objectKoinot?.find(
-      (el) => el.id === e.target.value
-    )?.children;
-    // setSubCategory(children);
-    if (children?.length)
-      setProduct((state) => ({
-        ...state,
-        categoryId: children[0].id,
-      }));
-    else
-      setProduct((state) => ({
-        ...state,
-        categoryId: 1,
-      }));
-  };
+  useEffect(() => {
+    setProduct((state) => ({
+      ...state,
+      districtId: district?.data?.objectKoinot?.content[0]?.id,
+    }));
+  }, [district.data]);
 
   return (
     <div>
+      {activeModal ? <ProductModal /> : null}
       <div className="addImage">
         <h3 className="addImage-title">Rasm qo’shish</h3>
         <div className="addImage-box">
-          {imgBox?.map((el, index) => (
-            <img
-              key={index}
-              src={URL.createObjectURL(el)}
-              alt="error"
-              className="addImage-box-item"
-            />
-          ))}
+          {imgBox?.map((el, index) =>
+            el ? (
+              <img
+                key={index}
+                src={URL.createObjectURL(el)}
+                alt="error"
+                className="addImage-box-item"
+              />
+            ) : null
+          )}
           <label htmlFor="create-product-img" className="addImage-box-button">
             <BsPlusCircle />
             <span>Rasm qo’shish</span>
@@ -117,16 +130,23 @@ export default function ProductCreate() {
             rows="10"
             maxLength={500}
             min={3}
-            required></textarea>
+            required
+          ></textarea>
         </label>
         <label className="product-create-label">
           <h4>Kategoriya</h4>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select
-              value={category}
-              onChange={handleChange}
+              value={product.categoryId}
+              onChange={(e) =>
+                setProduct((state) => ({
+                  ...state,
+                  categoryId: e.target.value,
+                }))
+              }
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}>
+              inputProps={{ "aria-label": "Without label" }}
+            >
               {data?.objectKoinot?.length ? (
                 data?.objectKoinot?.map((el, index) => (
                   <MenuItem key={index} value={el?.id}>
@@ -142,10 +162,87 @@ export default function ProductCreate() {
         <label className="product-create-label">
           <h4>Product Holati</h4>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <Select displayEmpty inputProps={{ "aria-label": "Without label" }}>
+            <Select
+              onChange={(e) =>
+                setProduct((state) => ({
+                  ...state,
+                  productQuality: e.target.value,
+                }))
+              }
+              value={product.productQuality}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
               <MenuItem value="AVERAGE">AVERAGE</MenuItem>
               <MenuItem value="NEW">NEW</MenuItem>
               <MenuItem value="TOP">TOP</MenuItem>
+            </Select>
+          </FormControl>
+        </label>
+        <label className="product-create-label">
+          <h4>Shahar</h4>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <Select
+              onChange={(e) =>
+                setProduct((state) => ({
+                  ...state,
+                  regionId: e.target.value,
+                }))
+              }
+              value={product.regionId}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              {region.data
+                ? region.data.objectKoinot.content.map((el) => (
+                    <MenuItem key={el.id} value={el.id}>
+                      {el.name}
+                    </MenuItem>
+                  ))
+                : null}
+            </Select>
+          </FormControl>
+        </label>
+        <label className="product-create-label">
+          <h4>Tuman</h4>
+          {district.data ? (
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <Select
+                onChange={(e) =>
+                  setProduct((state) => ({
+                    ...state,
+                    districtId: e.target.value,
+                  }))
+                }
+                value={product.districtId}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                {district.data.objectKoinot.content.map((el) => (
+                  <MenuItem key={el.id} value={el.id}>
+                    {el.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ) : null}
+        </label>
+        <label className="product-create-label">
+          <h4>Top</h4>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <Select
+              onChange={(e) =>
+                setProduct((state) => ({
+                  ...state,
+                  top: e.target.value,
+                }))
+              }
+              value={product.top}
+              displayEmpty
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value={true}>True</MenuItem>
+              <MenuItem value={false}>False</MenuItem>
             </Select>
           </FormControl>
         </label>
@@ -158,7 +255,7 @@ export default function ProductCreate() {
                 phoneNumber: e.target.value,
               }))
             }
-            type="number"
+            type="tel"
             maxLength={500}
             min={3}
             required

@@ -26,15 +26,17 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
       <Navigate to="/profile" replace />;
       window.location.reload();
       handleClose();
-    
     })
     .catch((err) => console.log(err));
   return response.data;
 };
 
-// export const createProduct = async (data, setResponse) => {
-//   const response = await axios.post(`${API_BASE_URL}`);
-// };
+export const createProduct = async (data) => {
+  const response = await axios.post(`${API_BASE_URL}/product/v1/`, data, {
+    headers: "multipart/form-data",
+  });
+  return response.data;
+};
 
 export const getCategory = async () => {
   const response = await axios.get(`${API_BASE_URL}/category/v1`);
@@ -66,14 +68,14 @@ export const getSetupData = async () => {
 
 export const fetchRegionData = async () => {
   const response = await axios.get(
-    `${API_BASE_URL}/region/v1/all?page=0&size=10`
+    `${API_BASE_URL}/region/v1/all?page=0&size=100`
   );
   return response.data;
 };
 
-export const fetchDistrictData = async (code) => {
+export const fetchDistrictData = async (code, setData) => {
   const response = await axios.get(
-    `${API_BASE_URL}/district/v1/all?page=0&regionId=${code}&size=10`
+    `${API_BASE_URL}/district/v1/all?page=0&regionId=${code}&size=100`
   );
   return response.data;
 };
