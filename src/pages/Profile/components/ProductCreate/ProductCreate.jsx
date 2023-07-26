@@ -30,21 +30,21 @@ export default function ProductCreate() {
   };
   const { data } = useQuery("category", getCategory);
 
-  useEffect(() => {
-    const id = data?.objectKoinot[0]?.id;
-    setCategory(id);
+  // useEffect(() => {
+  //   const id = data?.objectKoinot[0]?.id;
+  //   setCategory(id);
 
-    const children = data?.objectKoinot?.find((el) => el.id === id)?.children;
-    setSubCategory(children);
-    console.log(data);
-  }, [data]);
+  //   // const children = data?.objectKoinot?.find((el) => el.id === id)?.children;
+  //   // setSubCategory(children);
+  //   console.log(data);
+  // }, [data]);
 
   const handleChange = (e) => {
-    setCategory(e.target.value);
+    // setCategory(e.target.value);
     const children = data?.objectKoinot?.find(
       (el) => el.id === e.target.value
     )?.children;
-    setSubCategory(children);
+    // setSubCategory(children);
     if (children?.length)
       setProduct((state) => ({
         ...state,
