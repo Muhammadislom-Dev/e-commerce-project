@@ -11,10 +11,9 @@ import { useQuery } from "react-query";
 import { fetchDistrictData, fetchRegionData } from "../../../../api";
 import { Box, CircularProgress } from "@mui/material";
 
-function Header() {
+function Header({ code, setCode, setSearch, handleClear }) {
   const [age, setAge] = React.useState("");
-  const [district, setDistrict] = useState("");
-  const [code, setCode] = useState("");
+  const [district, setDistrict] = useState(null);
   const handleChange = (event) => {
     setAge(event?.target?.value);
     setCode(event?.target?.value);
@@ -64,6 +63,9 @@ function Header() {
               id="demo-simple-select"
               value={age}
               onChange={handleChange}>
+              <MenuItem onClick={handleClear} value="">
+                Barchasi
+              </MenuItem>
               {region.objectKoinot.content.map((data) => (
                 <MenuItem key={data.id} value={data.id}>
                   {data.name}
@@ -78,7 +80,7 @@ function Header() {
               value={district}
               onChange={handleDistrict}>
               {districtData?.objectKoinot?.content?.map((data) => (
-                <MenuItem key={data.id} value={data.name}>
+                <MenuItem key={data.id} value={data.id}>
                   {data.name}
                 </MenuItem>
               ))}
@@ -90,6 +92,7 @@ function Header() {
               type="search"
               placeholder="Nimadir qidiramizmi?"
               className="header-input"
+              onChange={(e) => setSearch(e.target.value)}
             />
           </label>
         </div>

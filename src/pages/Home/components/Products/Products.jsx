@@ -5,12 +5,9 @@ import { getProductNewsData, getProductTrueData } from "../../../../api";
 import { useQuery } from "react-query";
 import { Box, CircularProgress } from "@mui/material";
 
-function Products() {
+function Products({ code, product, paramsData }) {
   const [popular, setPopular] = useState("YANGILARI");
-  const { data, isLoading, isError } = useQuery(
-    "productData",
-    getProductNewsData
-  );
+  const { data, isLoading } = useQuery("productData", getProductNewsData);
   const { data: trueData } = useQuery("dataLoading", getProductTrueData);
 
   if (isLoading) {
@@ -54,15 +51,23 @@ function Products() {
       </div>
       {popular === "YANGILARI" ? (
         <div className="products">
-          {data?.content?.map((evt, index) => (
-            <Card data={evt} key={index} />
-          ))}
+          {code === null
+            ? data?.content?.map((evt, index) => (
+                <Card data={evt} key={index} />
+              ))
+            : paramsData?.content?.map((evt, index) => (
+                <Card data={evt} key={index} />
+              ))}
         </div>
       ) : (
         <div className="products">
-          {trueData.content.map((evt, index) => (
-            <Card data={evt} key={index} />
-          ))}
+          {code === null
+            ? trueData?.content?.map((evt, index) => (
+                <Card data={evt} key={index} />
+              ))
+            : product?.content?.map((evt, index) => (
+                <Card data={evt} key={index} />
+              ))}
         </div>
       )}
     </div>

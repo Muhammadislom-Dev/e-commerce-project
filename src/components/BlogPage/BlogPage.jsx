@@ -1,11 +1,8 @@
 import React from "react";
-import images1 from "../../assets/images1.png";
 import clock from "../../assets/clock.svg";
 import eye from "../../assets/eye.svg";
 import share from "../../assets/share.svg";
-import images2 from "../../assets/images2.png";
-import { useParams } from "react-router-dom";
-import { getBlogData, getByIdBlogContent, getByIdBlogData } from "../../api";
+import { getBlogData, getByIdBlogContent } from "../../api";
 import { useQuery } from "react-query";
 import { Box, CircularProgress } from "@mui/material";
 

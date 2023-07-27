@@ -197,3 +197,27 @@ export const getProductNewsData = async () => {
   );
   return response.data;
 };
+
+export const getParamsProductData = async (code, search) => {
+  const response = await axios.get(
+    `${API_BASE_URL}/product/v1?page=0&region=${code}&search=${search}&size=24&sortBy=createdAt&sortDirection=DESC&top=false`,
+    {
+      headers: {
+        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getProductParamsTrueData = async (code, search) => {
+  const response = await axios.get(
+    `${API_BASE_URL}/product/v1?page=0&region=${code}&search=${search}&size=24&top=true`,
+    {
+      headers: {
+        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+  return response.data;
+};

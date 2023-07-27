@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import location from "../../assets/location.svg";
 import clock from "../../assets/clock.svg";
 import eye from "../../assets/eye.svg";
@@ -23,6 +23,20 @@ import "swiper/css/thumbs";
 
 function AboutProduct() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [clickCountToday, setClickCountToday] = useState(0);
+  const [clickCountThisMonth, setClickCountThisMonth] = useState(0);
+
+  const handleClick = () => {
+    setClickCountToday((prevCount) => prevCount + 1);
+    setClickCountThisMonth((prevCount) => prevCount + 1);
+    showNotification();
+  };
+
+  const showNotification = () => {
+    // Bu funktsiyada "notification" ni chiqaring
+    alert("Button bosildi! Notification chiqdi!");
+  };
+
   const { id } = useParams();
   const { data, isLoading, isError } = useQuery(["product", id], () =>
     getByIdProductData(id)
@@ -45,8 +59,6 @@ function AboutProduct() {
 
   const secondDate = data?.uploadedAt / 1000;
   const formatUpdateDate = formatSecondsToDateString(secondDate);
-
-  console.log(data);
 
   if (isLoading) {
     return (
@@ -176,6 +188,10 @@ function AboutProduct() {
             ))}
           </Swiper>
         </div>
+
+        <button onClick={handleClick}>Button</button>
+        <p>Today's click count: {clickCountToday}</p>
+        <p>This month's click count: {clickCountThisMonth}</p>
       </div>
       <div className="about">
         <div className="container">
