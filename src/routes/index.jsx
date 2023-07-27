@@ -7,6 +7,7 @@ import BlogAbout from "../pages/Home/components/Blog/Blog";
 import LikePage from "../pages/LikePage/LikePage";
 import AboutProduct from "../pages/AboutProduct/AboutProduct";
 import Profile from "../pages/Profile/Profile";
+import BlogPage from "../components/BlogPage/BlogPage";
 
 function AppRoutes() {
   const token = localStorage.getItem("accessToken");
@@ -19,6 +20,15 @@ function AppRoutes() {
           element={
             <>
               <Blog />
+              <BlogAbout />
+            </>
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <>
+              <BlogPage />
               <BlogAbout />
             </>
           }

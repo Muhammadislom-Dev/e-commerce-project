@@ -25,7 +25,7 @@ function Navbar() {
           </button>
         </div>
         <div className="navbar-right">
-          <Link to="/blog/about/:id" className="navbar-link">
+          <Link to="/blog" className="navbar-link">
             <img src={DocumentIcon} alt="" className="navbar-icon" />
             Blog
           </Link>
