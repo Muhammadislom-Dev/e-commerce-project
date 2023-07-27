@@ -36,6 +36,14 @@
   -webkit-box-orient: vertical;
 }
 
+.card__medium {
+  background: var(--foundation-orange-dark-active, #6d2f27) !important;
+}
+
+.card__new {
+  background: #5bc4bd !important;
+}
+
 .card__right_subTitle {
   width: 177px;
   color: var(--foundation-grey-normal, #232323);

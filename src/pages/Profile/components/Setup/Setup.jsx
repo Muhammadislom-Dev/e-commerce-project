@@ -5,9 +5,11 @@ import { FaCamera } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { useMutation, useQuery } from "react-query";
 import { getSetupData, uploadImage } from "../../../../api";
+import { useNavigate } from "react-router-dom";
 
 export default function Setup() {
   const [data, setData] = useState({ img: null });
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +21,11 @@ export default function Setup() {
     },
   });
 
-  const userData = useQuery("user data", getSetupData);
+  function handleDeleteProfile() {
+    localStorage.removeItem("accessToken");
+    window.location.reload();
+    navigate("/");
+  }
 
   return (
     <div className="setup">
@@ -125,7 +131,10 @@ export default function Setup() {
           <button className="product-create-form-button" type="submit">
             Yangilash
           </button>
-          <button className="setup-logOut" type="button">
+          <button
+            onClick={handleDeleteProfile}
+            className="setup-logOut"
+            type="button">
             <BiLogOut />
             <span>Profildan chiqish</span>
           </button>

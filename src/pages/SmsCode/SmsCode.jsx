@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PhoneSmsCode } from "../../api";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,17 @@ function SmsCode({ phoneNumber, handleClose }) {
     phoneNumber: phoneNumber,
     code: "",
   });
+  const [remainingTime, setRemainingTime] = useState(120); // 2 daqiqa uchun
+
+  useEffect(() => {
+    if (remainingTime > 0) {
+      const timer = setTimeout(() => {
+        setRemainingTime((prevTime) => prevTime - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [remainingTime]);
   const { mutate, isLoading } = useMutation((userData) =>
     PhoneSmsCode(userData, navigate, handleClose)
   );
@@ -24,6 +35,7 @@ function SmsCode({ phoneNumber, handleClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate(formData);
+    setRemainingTime(120);
   };
 
   if (isLoading) {
@@ -58,6 +70,9 @@ function SmsCode({ phoneNumber, handleClose }) {
           />
         </label>
         <p>{phoneNumber} telefon raqamiga tasdiqlash kodi jo’natildi</p>
+        {remainingTime > 0 ? (
+          <p>{remainingTime} sekunddan keyin yana yuborishingiz mumkin.</p>
+        ) : null}
         <button type="submit" className="form-button">
           Tasdiqlash
         </button>

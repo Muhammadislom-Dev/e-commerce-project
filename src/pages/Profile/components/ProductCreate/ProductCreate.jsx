@@ -13,6 +13,7 @@ import {
   uploadImage,
 } from "../../../../api";
 import ProductModal from "../ProductModal/ProductModal";
+import { Box, CircularProgress } from "@mui/material";
 
 export default function ProductCreate() {
   const [imgBox, setimageBox] = useState([]);
@@ -38,14 +39,17 @@ export default function ProductCreate() {
     onError: (error) => alert(error?.message),
   });
 
-  const productMutation = useMutation((data) => createProduct(data), {
-    onSuccess: (data) => {
-      setActiveModal(true);
-    },
-    onError: (error) => {
-      alert(error.message);
-    },
-  });
+  const { productMutation, isLoading } = useMutation(
+    (data) => createProduct(data),
+    {
+      onSuccess: (data) => {
+        setActiveModal(true);
+      },
+      onError: (error) => {
+        alert(error.message);
+      },
+    }
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,6 +70,21 @@ export default function ProductCreate() {
       districtId: district?.data?.objectKoinot?.content[0]?.id,
     }));
   }, [district.data]);
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
+  }
 
   return (
     <div>
@@ -130,8 +149,7 @@ export default function ProductCreate() {
             rows="10"
             maxLength={500}
             min={3}
-            required
-          ></textarea>
+            required></textarea>
         </label>
         <label className="product-create-label">
           <h4>Kategoriya</h4>
@@ -145,8 +163,7 @@ export default function ProductCreate() {
                 }))
               }
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
+              inputProps={{ "aria-label": "Without label" }}>
               {data?.objectKoinot?.length ? (
                 data?.objectKoinot?.map((el, index) => (
                   <MenuItem key={index} value={el?.id}>
@@ -171,8 +188,7 @@ export default function ProductCreate() {
               }
               value={product.productQuality}
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
+              inputProps={{ "aria-label": "Without label" }}>
               <MenuItem value="AVERAGE">AVERAGE</MenuItem>
               <MenuItem value="NEW">NEW</MenuItem>
               <MenuItem value="TOP">TOP</MenuItem>
@@ -191,8 +207,7 @@ export default function ProductCreate() {
               }
               value={product.regionId}
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
+              inputProps={{ "aria-label": "Without label" }}>
               {region.data
                 ? region.data.objectKoinot.content.map((el) => (
                     <MenuItem key={el.id} value={el.id}>
@@ -216,8 +231,7 @@ export default function ProductCreate() {
                 }
                 value={product.districtId}
                 displayEmpty
-                inputProps={{ "aria-label": "Without label" }}
-              >
+                inputProps={{ "aria-label": "Without label" }}>
                 {district.data.objectKoinot.content.map((el) => (
                   <MenuItem key={el.id} value={el.id}>
                     {el.name}
@@ -239,8 +253,7 @@ export default function ProductCreate() {
               }
               value={product.top}
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
+              inputProps={{ "aria-label": "Without label" }}>
               <MenuItem value={true}>True</MenuItem>
               <MenuItem value={false}>False</MenuItem>
             </Select>

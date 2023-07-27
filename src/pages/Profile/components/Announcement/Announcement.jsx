@@ -45,16 +45,15 @@ function Announcement() {
                   {evt?.region?.name}, {evt?.district?.name} tumani Bugun 13:11
                 </div>
                 <div className="card__right_blok">
-                  <a href="#" className="blok__old">
-                    {/* Eski */}
-                    {evt.quality === "NEW"
-                      ? "Yangi"
-                      : evt.quality === "TOP"
-                      ? "O'rtacha"
-                      : evt.quality === "AVERAGE"
-                      ? "Eski"
-                      : ""}
-                  </a>
+                  {evt.quality === "NEW" ? (
+                    <span className="blok__old card__new">Yangi</span>
+                  ) : evt.quality === "TOP" ? (
+                    <span className="blok__old card__medium">O'rtacha</span>
+                  ) : evt.quality === "AVERAGE" ? (
+                    <span className="blok__old">Eski</span>
+                  ) : (
+                    ""
+                  )}
                   <p className="blok__edit">
                     <span>
                       <img src={edit} alt="edit" />

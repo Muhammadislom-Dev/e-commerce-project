@@ -11,3 +11,7 @@ export { default as TekinMarket } from "./tekin market 1.svg";
 export { default as InstagramIcon } from "./instagram.svg";
 export { default as FacebookIcon } from "./facebook (1).svg";
 export { default as TelegramIcon } from "./telegram.svg";
+export { default as CallButton } from "./📞.svg";
+export { default as CloseButton } from "./Cross Mark.svg";
+export { default as DeveloperIcon } from "./👨‍💻.svg";
+export { default as AvatarIcon } from "./avatar.svg";

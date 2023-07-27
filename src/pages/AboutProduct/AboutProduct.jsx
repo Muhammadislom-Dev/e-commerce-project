@@ -20,22 +20,10 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import CallModal from "./components/Modal/Modal";
 
 function AboutProduct() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [clickCountToday, setClickCountToday] = useState(0);
-  const [clickCountThisMonth, setClickCountThisMonth] = useState(0);
-
-  const handleClick = () => {
-    setClickCountToday((prevCount) => prevCount + 1);
-    setClickCountThisMonth((prevCount) => prevCount + 1);
-    showNotification();
-  };
-
-  const showNotification = () => {
-    // Bu funktsiyada "notification" ni chiqaring
-    alert("Button bosildi! Notification chiqdi!");
-  };
 
   const { id } = useParams();
   const { data, isLoading, isError } = useQuery(["product", id], () =>
@@ -110,9 +98,6 @@ function AboutProduct() {
             <p className="blok__right_subTitle">{data.description}</p>
 
             <div className="blok__right_icons">
-              {/* <a href="#" className="icons__link">
-                O’rtacha
-              </a> */}
               {data?.quality === "NEW" ? (
                 <span className="icons__link card__new">Yangi</span>
               ) : data?.quality === "TOP" ? (
@@ -146,9 +131,8 @@ function AboutProduct() {
               </div>
             </div>
             <div className="blok__right_call">
-              <a href="#" className="call__link">
-                Qo’ng’iroq qilish
-              </a>
+              <CallModal number={data.phoneNumber} />
+
               <div className="call__children">
                 <img src={children} alt="children" />
                 <div className="call__children_orderer">
@@ -188,10 +172,6 @@ function AboutProduct() {
             ))}
           </Swiper>
         </div>
-
-        <button onClick={handleClick}>Button</button>
-        <p>Today's click count: {clickCountToday}</p>
-        <p>This month's click count: {clickCountThisMonth}</p>
       </div>
       <div className="about">
         <div className="container">

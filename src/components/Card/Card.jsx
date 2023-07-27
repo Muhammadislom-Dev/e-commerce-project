@@ -34,14 +34,6 @@ const Card = ({ data, key }) => {
   return (
     <>
       <div key={key} className="card">
-        {/* {data.photos ? (
-          <img
-            src={data.photos[0].filePath}
-            alt="tvSet"
-            className="card__img"
-          />
-        ) : null} */}
-
         {data.photos ? (
           <LazyLoadImage
             alt="Image"

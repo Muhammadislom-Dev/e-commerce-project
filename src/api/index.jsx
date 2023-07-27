@@ -221,3 +221,12 @@ export const getProductParamsTrueData = async (code, search) => {
   );
   return response.data;
 };
+
+export const getProfileData = async () => {
+  const response = await axios.get(`${API_BASE_URL}/auth/v1/me`, {
+    headers: {
+      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  return response.data;
+};
