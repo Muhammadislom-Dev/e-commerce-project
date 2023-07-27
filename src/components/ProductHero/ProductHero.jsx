@@ -26,8 +26,7 @@ export default function ProductHero() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
-            >
+              inputProps={{ "aria-label": "Without label" }}>
               <MenuItem value={1}>Barchasi</MenuItem>
               <MenuItem value={2}>Kiyim-Kechak</MenuItem>
             </Select>
@@ -61,14 +60,12 @@ export default function ProductHero() {
                   ? data.objectKoinot.map((el) => (
                       <div
                         key={el.id}
-                        className="product-hero-filter-category-item"
-                      >
+                        className="product-hero-filter-category-item">
                         <span
                           onClick={() => setsubcategory(el.id)}
                           style={
                             subcategory === el.id ? { color: "#F26957" } : null
-                          }
-                        >
+                          }>
                           {el.nameUz}
                         </span>
                         <SlArrowRight
@@ -85,8 +82,7 @@ export default function ProductHero() {
                                 ?.children.map((el) => (
                                   <div
                                     key={el.id}
-                                    className="product-hero-filter-subcategory-item"
-                                  >
+                                    className="product-hero-filter-subcategory-item">
                                     <span onClick={() => setSection(0)}>
                                       {el.nameUz}
                                     </span>
