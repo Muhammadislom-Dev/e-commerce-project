@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+export const API_URL = "http://64.227.105.70:1777/api";
 const API_BASE_URL = "http://64.227.105.70:1777/api"; // API ning manzili
 
 // Register uchun POST so'rov yuborish uchun funktsiya
@@ -75,17 +76,20 @@ export const fetchRegionData = async () => {
 
 export const fetchDistrictData = async (code, setData) => {
   const response = await axios.get(
-    `${API_BASE_URL}/district/v1/all?page=0&regionId=${code}&size=100`
+    `${API_BASE_URL}/district/v1/all?regionId=${code}`
   );
   return response.data;
 };
 
 export const getProductData = async () => {
-  const response = await axios.get(`${API_BASE_URL}/product/v1?page=0&size=20`, {
-    headers: {
-      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
-    },
-  });
+  const response = await axios.get(
+    `${API_BASE_URL}/product/v1?page=0&size=20`,
+    {
+      headers: {
+        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
   return response.data;
 };
 
@@ -134,6 +138,57 @@ export const getByIdProductData = async (id) => {
 export const getByIdCategoryData = async (id) => {
   const response = await axios.get(
     `${API_BASE_URL}/product/v1?category=${id}&page=0&size=100`,
+    {
+      headers: {
+        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getBlogData = async () => {
+  const response = await axios.get(`${API_BASE_URL}/blog/v1?page=0`, {
+    headers: {
+      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  return response.data;
+};
+
+export const getByIdBlogData = async (id) => {
+  const response = await axios.get(`${API_BASE_URL}/blog/v1/${id}`, {
+    headers: {
+      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  return response.data;
+};
+
+export const getByIdBlogContent = async (id) => {
+  const response = await axios.get(`${API_BASE_URL}/blog/v1/content/${id}`, {
+    headers: {
+      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  return response.data;
+};
+
+export const getProductTrueData = async () => {
+  const response = await axios.get(
+    `${API_BASE_URL}/product/v1?page=0&size=24&top=true`,
+    {
+      headers: {
+        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getProductNewsData = async () => {
+  const response = await axios.get(
+    `${API_BASE_URL}/product/v1?page=0&size=24&sortBy=createdAt&sortDirection=DESC&top=false`,
     {
       headers: {
         Authorization: `Barear ${localStorage.getItem("accessToken")}`,

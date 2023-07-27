@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import qaychi from "../../../../assets/qaychi.png";
-import ball from "../../../../assets/ball.png";
+import React, { useEffect, useState } from "react";
 import "./Products.css";
 import Card from "../../../../components/Card/Card";
-import { getProductData } from "../../../../api";
+import { getProductNewsData, getProductTrueData } from "../../../../api";
 import { useQuery } from "react-query";
 import { Box, CircularProgress } from "@mui/material";
 
 function Products() {
   const [popular, setPopular] = useState("YANGILARI");
-  const { data, isLoading, isError } = useQuery("productData", getProductData);
+  const { data, isLoading, isError } = useQuery(
+    "productData",
+    getProductNewsData
+  );
+  const { data: trueData } = useQuery("dataLoading", getProductTrueData);
 
   if (isLoading) {
     return (
@@ -52,13 +54,13 @@ function Products() {
       </div>
       {popular === "YANGILARI" ? (
         <div className="products">
-          {data.content.map((evt, index) => (
+          {data?.content?.map((evt, index) => (
             <Card data={evt} key={index} />
           ))}
         </div>
       ) : (
         <div className="products">
-          {data.content.map((evt, index) => (
+          {trueData.content.map((evt, index) => (
             <Card data={evt} key={index} />
           ))}
         </div>

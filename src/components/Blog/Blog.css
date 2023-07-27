@@ -57,6 +57,12 @@
   line-height: 21px;
 }
 
+.blog-about-img {
+  width: 1010px;
+  height: 347px;
+  border-radius: 20px;
+}
+
 .blok__section_right {
   display: flex;
   align-items: center;
@@ -67,7 +73,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 21px; 
+  line-height: 21px;
 }
 
 .blok__right_title {

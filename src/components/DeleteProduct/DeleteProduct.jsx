@@ -32,7 +32,7 @@ function DeleteProduct({ mutate, data }) {
         <img src={backet} alt="backet" className="blok__backet" />
       </button>
       <Modal
-        className="delete-modal"
+        className="delete-modal-product"
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"

@@ -15,7 +15,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
-          path="/blog"
+          path="/blog/about/:id"
           element={
             <>
               <Blog />

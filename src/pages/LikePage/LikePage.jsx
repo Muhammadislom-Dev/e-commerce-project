@@ -1,18 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Like from "../../components/Like/Like";
 import Products from "../Home/components/Products/Products";
 import Card from "../../components/Card/Card";
 import qaychi from "../../assets/qaychi.png";
 import "./LikePage.css";
 import { useQuery } from "react-query";
-import { getLikeProductData } from "../../api";
+import { API_URL, getLikeProductData } from "../../api";
 import { Box, CircularProgress } from "@mui/material";
 
 function LikePage() {
-  // const { data, isLoading } = useQuery("exampleProduct", getLikeProductData);
-  const { data, isLoading, isError } = useQuery(() => getLikeProductData());
-
-  console.log(data);
+  const { data, isLoading, isError } = useQuery("likeData", getLikeProductData);
 
   if (isLoading) {
     return (
@@ -28,6 +25,8 @@ function LikePage() {
       </Box>
     );
   }
+
+  console.log(data)
   return (
     <div>
       <Like />

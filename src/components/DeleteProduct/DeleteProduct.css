@@ -1,9 +1,7 @@
-.delete-modal {
+body .delete-modal-product {
   border-radius: 15px;
-  background: var(--color-light-light, #fcfcfd);
+  background: rgba(0, 0, 0, 0.4) !important;
   display: flex;
-  width: 544px;
-  padding: 32px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -12,11 +12,12 @@ import { fetchDistrictData, fetchRegionData } from "../../../../api";
 import { Box, CircularProgress } from "@mui/material";
 
 function Header() {
-  const [age, setAge] = React.useState("Andijon");
+  const [age, setAge] = React.useState("");
+  const [district, setDistrict] = useState("");
   const [code, setCode] = useState("");
   const handleChange = (event) => {
-    setAge(event.target.value);
-    setCode(event.target.value);
+    setAge(event?.target?.value);
+    setCode(event?.target?.value);
   };
 
   const {
@@ -25,11 +26,9 @@ function Header() {
     isError,
   } = useQuery("exampleData", fetchRegionData);
 
-  const { data: district } = useQuery(
-    "exampleDistrict",
+  const { data: districtData } = useQuery(["product", code], () =>
     fetchDistrictData(code)
   );
-
 
   if (isLoading) {
     return (
@@ -49,6 +48,10 @@ function Header() {
   if (isError) {
     return <p>Xatolik yuz berdi.</p>;
   }
+
+  const handleDistrict = (event) => {
+    setDistrict(event?.target?.value);
+  };
 
   return (
     <div className="header">
@@ -72,11 +75,13 @@ function Header() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={age}
-              onChange={handleChange}>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              value={district}
+              onChange={handleDistrict}>
+              {districtData?.objectKoinot?.content?.map((data) => (
+                <MenuItem key={data.id} value={data.name}>
+                  {data.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <label htmlFor="">

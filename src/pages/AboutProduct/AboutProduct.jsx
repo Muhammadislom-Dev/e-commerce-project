@@ -1,17 +1,10 @@
-import React from "react";
-import duvoyka from "../../assets/duvoyka.png";
+import React, { useState } from "react";
 import location from "../../assets/location.svg";
 import clock from "../../assets/clock.svg";
 import eye from "../../assets/eye.svg";
 import children from "../../assets/children.svg";
-import left from "../../assets/left.svg";
-import slider1 from "../../assets/slider1.svg";
-import slider2 from "../../assets/slider2.svg";
-import slider3 from "../../assets/slider3.svg";
-import right from "../../assets/right.svg";
 import "./AboutProduct.css";
 import Card from "../../components/Card/Card";
-import qaychi from "../../assets/qaychi.png";
 import { useParams } from "react-router-dom";
 import {
   getByIdCategoryData,
@@ -20,12 +13,21 @@ import {
 } from "../../api";
 import { useQuery } from "react-query";
 import { Box, CircularProgress } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 
 function AboutProduct() {
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { id } = useParams();
   const { data, isLoading, isError } = useQuery(["product", id], () =>
     getByIdProductData(id)
   );
+
   const category = data?.category?.id;
   const { data: product } = useQuery("productData", getProductData);
   const { data: categoryData } = useQuery(["category", category], () =>
@@ -38,11 +40,13 @@ function AboutProduct() {
     return date.toLocaleDateString("en-US", options);
   }
 
-  const seconds = data?.user?.lastOnline / 1000; // 1690350791.702  uploadedAt
+  const seconds = data?.user?.lastOnline / 1000;
   const formattedDate = formatSecondsToDateString(seconds);
 
-  const secondDate = data?.uploadedAt / 1000; // 1690350791.702  uploadedAt
+  const secondDate = data?.uploadedAt / 1000;
   const formatUpdateDate = formatSecondsToDateString(secondDate);
+
+  console.log(data);
 
   if (isLoading) {
     return (
@@ -59,14 +63,35 @@ function AboutProduct() {
     );
   }
 
-  console.log(category);
-
   return (
     <>
       <div className="container">
         <div className="blok">
           <div className="blok__left">
-            <img src={duvoyka} alt="duvoyka" className="blok__left_img" />
+            <Swiper
+              style={{
+                "--swiper-navigation-color": "#fff",
+                "--swiper-pagination-color": "#fff",
+              }}
+              loop={true}
+              spaceBetween={10}
+              navigation={true}
+              thumbs={{
+                swiper:
+                  thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+              }}
+              modules={[FreeMode, Navigation, Thumbs]}
+              className="mySwiper2">
+              {data?.photos?.map((evt, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    className="aboutproduct-img"
+                    alt={evt?.name}
+                    src={evt?.filePath}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
           <div className="blok__right">
             <h1 className="blok__right_title">{data.name}</h1>
@@ -130,12 +155,26 @@ function AboutProduct() {
             </p>
           </div>
         </div>
-        <div className="slider">
-          <img src={left} alt="left" className="slider__left" />
-          <img src={slider1} alt="slider1" className="slider__one" />
-          <img src={slider2} alt="slider2" className="slider__two" />
-          <img src={slider3} alt="slider3" className="slider__three" />
-          <img src={right} alt="right" className="slider__right" />
+        <div className="slider aboutproduct-slider">
+          <Swiper
+            onSwiper={setThumbsSwiper}
+            loop={true}
+            spaceBetween={10}
+            slidesPerView={4}
+            freeMode={true}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper">
+            {data?.photos?.map((evt, index) => (
+              <SwiperSlide key={index}>
+                <img
+                  className="aboutproduct-imgs"
+                  alt={evt?.name}
+                  src={evt?.filePath}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
       <div className="about">

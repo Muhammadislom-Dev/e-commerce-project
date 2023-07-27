@@ -45,6 +45,7 @@ export default function LoginModal() {
       )}
       <Modal
         open={open}
+        className="modal-login-body"
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">

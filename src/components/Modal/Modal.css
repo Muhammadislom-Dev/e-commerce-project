@@ -1,6 +1,10 @@
-body .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
-  background: #c96a30;
-  backdrop-filter: blur(9px);
+body .modal-login-body {
+  background: #c96a30 !important;
+  backdrop-filter: blur(9px) !important;
+}
+
+body .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop{
+  background-color: transparent;
 }
 
 .navbar-profile {

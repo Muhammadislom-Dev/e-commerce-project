@@ -10,6 +10,16 @@
   border-radius: 40px;
 }
 
+.blok__left {
+  width: 40%;
+}
+
+.aboutproduct-img {
+  width: 516px;
+  height: 540px;
+  border-radius: 40px;
+}
+
 .blok__right_title {
   width: 584px;
   color: #000;
@@ -203,7 +213,32 @@
   transition: 0.3s;
 }
 
-.about-more:hover{
+.about-more:hover {
   background-color: transparent;
   color: #f26957;
+}
+
+.card__medium {
+  background: var(--foundation-orange-dark-active, #6d2f27);
+}
+
+.card__new {
+  background: #5bc4bd;
+}
+
+.aboutproduct-imgs {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+.mySwiper {
+  width: 100%;
+}
+
+.aboutproduct-slider {
+  width: 35%;
+  margin-right: auto;
+  margin-left: 80px;
 }

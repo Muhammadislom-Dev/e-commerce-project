@@ -21,6 +21,8 @@ function Language() {
     setactiveLang((el) => !el);
     setSelectedLanguage(lng);
   };
+
+  console.log(selectedLanguage);
   return (
     <div>
       <div className="navbarvictorina_language">
@@ -28,7 +30,7 @@ function Language() {
           className="navbarvictorina_language-wrapper"
           onClick={() => setactiveLang((el) => !el)}>
           <CiGlobe className="navbarvictorina_language-icon" />
-          <span>{selectedLanguage}</span>
+          <span>{selectedLanguage === "ru" ? "Russian" : "O'zbekcha"}</span>
           <IoMdArrowDropdown className="navbarvictorina_language-iconArrow" />
         </div>
         <div

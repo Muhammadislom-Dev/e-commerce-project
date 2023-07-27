@@ -1,12 +1,12 @@
 import React from "react";
 import circle from "../../assets/cricle.png";
-import heart from "../../assets/heart.svg";
 import headerLike from "../../assets/img/heart.svg";
 import "./Card.css";
 import { Link } from "react-router-dom";
 import { useMutation } from "react-query";
 import { likeProductPost } from "../../api";
 import { Box, CircularProgress } from "@mui/material";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Card = ({ data, key }) => {
   const { isLoading, isError, mutate } = useMutation((productId) =>
@@ -17,7 +17,6 @@ const Card = ({ data, key }) => {
     mutate(data.id);
   };
 
-  
   if (isLoading) {
     return (
       <Box
@@ -35,11 +34,22 @@ const Card = ({ data, key }) => {
   return (
     <>
       <div key={key} className="card">
-        <img
-          src={data?.photos[0]?.filePath}
-          alt="tvSet"
-          className="card__img"
-        />
+        {/* {data.photos ? (
+          <img
+            src={data.photos[0].filePath}
+            alt="tvSet"
+            className="card__img"
+          />
+        ) : null} */}
+
+        {data.photos ? (
+          <LazyLoadImage
+            alt="Image"
+            className="card__img"
+            src={data.photos[0].filePath}
+          />
+        ) : null}
+
         <button onClick={handleLike} className="card-heart">
           <img src={headerLike} alt="heart" className="card__heart" />
           {/* {data.active === true ? (

@@ -24,9 +24,7 @@
 .navbarvictorina_language span {
   display: flex;
   align-items: center;
-  text-transform: uppercase;
   color: var(--foundation-grey-normal, #232323);
-
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
