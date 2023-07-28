@@ -9,6 +9,7 @@ export const registerUser = async (userData, setCode) => {
   const response = await axios
     .post(`${API_BASE_URL}/auth/v1/register`, userData)
     .then((res) => {
+      toast.success("Telefon raqamingizga tasdiqlash uchun sms yuborildi!");
       if (res.status === 200) {
         setCode(true);
       }
@@ -21,6 +22,7 @@ export const PhoneSmsCode = async (userData, navigate, handleClose) => {
   const response = await axios
     .post(`${API_BASE_URL}/auth/v1/verify`, userData)
     .then((res) => {
+      toast.success("Tabriklaymiz siz ro'yhatdan o'tdingiz!");
       localStorage.setItem(
         "accessToken",
         `${res?.data?.objectKoinot?.accessToken}`
@@ -46,16 +48,14 @@ export const getCategory = async () => {
 };
 
 export const uploadImage = async (image) => {
-  const response = await axios.post(
-    `${API_BASE_URL}/attachment/v1/upload-photo`,
-    image,
-    {
+  const response = await axios
+    .post(`${API_BASE_URL}/attachment/v1/upload-photo`, image, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         "Content-Type": "multipart/form-data",
       },
-    }
-  );
+    })
+    .then((res) => toast.success("Muvaffaqiyatli rasm yuklandi!"));
   return response.data;
 };
 

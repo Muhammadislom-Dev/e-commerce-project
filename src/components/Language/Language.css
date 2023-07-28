@@ -25,11 +25,13 @@
   display: flex;
   align-items: center;
   color: var(--foundation-grey-normal, #232323);
-  font-family: Inter;
-  font-size: 14px;
+  font-family: Archivo;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
+  gap: 15px 10px;
+  cursor: pointer;
 }
 
 .navbarvictorina_language-bar {
@@ -46,16 +48,15 @@
 }
 
 .navbarvictorina_language p {
-  width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
   color: var(--foundation-grey-normal, #232323);
-
+  font-family: Archivo;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   cursor: pointer;
   margin-top: 0;
-  transition: 0.2s;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  margin-left: -15px;
 }

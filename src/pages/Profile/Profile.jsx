@@ -12,6 +12,7 @@ import Setup from "./components/Setup/Setup";
 import { AvatarIcon } from "../../assets/icon";
 import { useQuery } from "react-query";
 import { API_URL, getProfileData } from "../../api";
+import { CircularProgress } from "@mui/material";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,20 +54,20 @@ function Profile() {
     setValue(newValue);
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <Box
-  //       display="flex"
-  //       alignItems="center"
-  //       justifyContent="center"
-  //       height={"80vh"}>
-  //       <CircularProgress
-  //         color="success"
-  //         style={{ width: "100px", height: "100px" }}
-  //       />
-  //     </Box>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height={"80vh"}>
+        <CircularProgress
+          color="success"
+          style={{ width: "100px", height: "100px" }}
+        />
+      </Box>
+    );
+  }
 
   console.log(data);
   return (
@@ -74,7 +75,13 @@ function Profile() {
       <div className="profile">
         <div className="container">
           <div className="profile-list">
-            <img src={PersonImage} alt="" className="profile-img" />
+            <img
+              src={
+                data.objectKoinot.photo ? data?.objectKoinot?.photo : AvatarIcon
+              }
+              alt=""
+              className="profile-img"
+            />
             <div className="profile-item">
               <h3 className="profile-name">User Name</h3>
               <a
