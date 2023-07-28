@@ -47,9 +47,7 @@ function a11yProps(index) {
 
 function Profile() {
   const [value, setValue] = React.useState(0);
-  const [data, setData] = useState([]);
-  // const { data, isLoading } = useQuery(["profile"], () => getProfileData());
-
+  const { data, isLoading } = useQuery("profile", getProfileData);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,8 +77,10 @@ function Profile() {
             <img src={PersonImage} alt="" className="profile-img" />
             <div className="profile-item">
               <h3 className="profile-name">User Name</h3>
-              <a href="tel:+998991234567" className="profile-number">
-                +99899 123 45 67
+              <a
+                href={`tel:+${data?.objectKoinot?.phoneNumber}`}
+                className="profile-number">
+                +{data?.objectKoinot?.phoneNumber}
               </a>
             </div>
           </div>

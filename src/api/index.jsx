@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export const API_URL = "http://64.227.105.70:1777/api";
 const API_BASE_URL = "http://64.227.105.70:1777/api"; // API ning manzili
 
@@ -61,7 +62,7 @@ export const uploadImage = async (image) => {
 export const getSetupData = async () => {
   const response = await axios.get(`${API_BASE_URL}/auth/v1/me`, {
     headers: {
-      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });
   return response.data;
@@ -86,7 +87,7 @@ export const getProductData = async () => {
     `${API_BASE_URL}/product/v1?page=0&size=20`,
     {
       headers: {
-        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }
   );
@@ -103,8 +104,26 @@ export const deleteProduct = async (id) => {
 };
 
 export const likeProductPost = async (id) => {
-  const response = await axios.post(
-    `${API_BASE_URL}/basket-favourite-product/v1/favourites-save-remove?productId=${id}&searchType=WEB`,
+  const response = await axios
+    .post(
+      `${API_BASE_URL}/basket-favourite-product/v1/favourites-save-remove?productId=${id}&searchType=WEB`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
+    .then((res) => {
+      toast.success(
+        "Mahsulot muvaffaqiyatli tanlanganlar ro'yhatiga qo'shildi!"
+      );
+    });
+  return response.data;
+};
+
+export const getLikeProductData = async () => {
+  const response = await axios.get(
+    `${API_BASE_URL}/basket-favourite-product/v1/favourites?page=0&size=10`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -114,22 +133,10 @@ export const likeProductPost = async (id) => {
   return response.data;
 };
 
-export const getLikeProductData = async () => {
-  const response = await axios.get(
-    `${API_BASE_URL}/basket-favourite-product/v1/favourites?page=0&size=10`,
-    {
-      headers: {
-        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
-      },
-    }
-  );
-  return response.data;
-};
-
 export const getByIdProductData = async (id) => {
   const response = await axios.get(`${API_BASE_URL}/product/v1/${id}`, {
     headers: {
-      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });
   return response.data;
@@ -140,7 +147,7 @@ export const getByIdCategoryData = async (id) => {
     `${API_BASE_URL}/product/v1?category=${id}&page=0&size=100`,
     {
       headers: {
-        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }
   );
@@ -150,7 +157,7 @@ export const getByIdCategoryData = async (id) => {
 export const getBlogData = async () => {
   const response = await axios.get(`${API_BASE_URL}/blog/v1?page=0`, {
     headers: {
-      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });
   return response.data;
@@ -159,7 +166,7 @@ export const getBlogData = async () => {
 export const getByIdBlogData = async (id) => {
   const response = await axios.get(`${API_BASE_URL}/blog/v1/${id}`, {
     headers: {
-      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });
   return response.data;
@@ -168,7 +175,7 @@ export const getByIdBlogData = async (id) => {
 export const getByIdBlogContent = async (id) => {
   const response = await axios.get(`${API_BASE_URL}/blog/v1/content/${id}`, {
     headers: {
-      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });
   return response.data;
@@ -179,7 +186,7 @@ export const getProductTrueData = async () => {
     `${API_BASE_URL}/product/v1?page=0&size=24&top=true`,
     {
       headers: {
-        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }
   );
@@ -191,7 +198,7 @@ export const getProductNewsData = async () => {
     `${API_BASE_URL}/product/v1?page=0&size=24&sortBy=createdAt&sortDirection=DESC&top=false`,
     {
       headers: {
-        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }
   );
@@ -203,7 +210,7 @@ export const getParamsProductData = async (code, search) => {
     `${API_BASE_URL}/product/v1?page=0&region=${code}&search=${search}&size=24&sortBy=createdAt&sortDirection=DESC&top=false`,
     {
       headers: {
-        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }
   );
@@ -215,7 +222,7 @@ export const getProductParamsTrueData = async (code, search) => {
     `${API_BASE_URL}/product/v1?page=0&region=${code}&search=${search}&size=24&top=true`,
     {
       headers: {
-        Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }
   );
@@ -225,7 +232,7 @@ export const getProductParamsTrueData = async (code, search) => {
 export const getProfileData = async () => {
   const response = await axios.get(`${API_BASE_URL}/auth/v1/me`, {
     headers: {
-      Authorization: `Barear ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
   });
   return response.data;

@@ -1,6 +1,7 @@
 import React from "react";
 import circle from "../../assets/cricle.png";
 import headerLike from "../../assets/img/heart.svg";
+import heart from "../../assets/heart.svg";
 import "./Card.css";
 import { Link } from "react-router-dom";
 import { useMutation } from "react-query";
@@ -8,7 +9,7 @@ import { likeProductPost } from "../../api";
 import { Box, CircularProgress } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const Card = ({ data, key }) => {
+const Card = ({ data, key, like }) => {
   const { isLoading, isError, mutate } = useMutation((productId) =>
     likeProductPost(productId)
   );
@@ -31,6 +32,7 @@ const Card = ({ data, key }) => {
       </Box>
     );
   }
+  console.log(data);
   return (
     <>
       <div key={key} className="card">
@@ -42,14 +44,15 @@ const Card = ({ data, key }) => {
           />
         ) : null}
 
-        <button onClick={handleLike} className="card-heart">
-          <img src={headerLike} alt="heart" className="card__heart" />
-          {/* {data.active === true ? (
+        {like ? (
+          <button className="card-heart">
             <img src={heart} alt="heart" className="card__heart" />
-          ) : (
+          </button>
+        ) : (
+          <button onClick={handleLike} className="card-heart">
             <img src={headerLike} alt="heart" className="card__heart" />
-          )} */}
-        </button>
+          </button>
+        )}
 
         <Link className="card-link" to={`/products/about/${data?.id}`}>
           <h2 className="card__title">{data?.name}</h2>
