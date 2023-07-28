@@ -63,3 +63,48 @@
   font-weight: 500;
   line-height: normal;
 }
+
+@media (max-width: 1250px) {
+  .container {
+    width: 100%;
+  }
+  .navbar {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 100%;
+  }
+  .navbar {
+    padding: 20px 0;
+  }
+  .navbar-submit {
+    display: none;
+  }
+  .navbar-link {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .navbar .container {
+    justify-content: space-evenly;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-category {
+    display: none;
+  }
+  .navbar .container {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__icon {
+    width: 108px;
+  }
+}
