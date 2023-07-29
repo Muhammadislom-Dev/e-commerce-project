@@ -57,7 +57,7 @@ function Navbar() {
       <div className="container">
         <div className="navbar-left">
           <Link to="/">
-            <img src={LogoIcon} alt="" className="navbar-icon" />
+            <img src={LogoIcon} alt="" className="navbar-icon navbar__icon" />
           </Link>
           <button
             className="navbar-category"
@@ -79,6 +79,7 @@ function Navbar() {
           <Language />
           <LoginModal />
           <Link to="/profile" className="navbar-submit">
+            <span>+</span>
             E’lon berish
           </Link>
         </div>

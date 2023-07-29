@@ -8,6 +8,7 @@ import { useMutation } from "react-query";
 import { likeProductPost } from "../../api";
 import { Box, CircularProgress } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Card = ({ data, key, like }) => {
   const { isLoading, isError, mutate } = useMutation((productId) =>
@@ -32,18 +33,26 @@ const Card = ({ data, key, like }) => {
       </Box>
     );
   }
-  console.log(data);
   return (
     <>
       <div key={key} className="card">
         {data.photos ? (
           <LazyLoadImage
-            alt="Image"
-            className="card__img"
             src={data.photos[0].filePath}
+            placeholderSrc={data.photos[0].filePath}
+            alt="Image"
+            draggable={false}
+            effect="blur"
+            className="card__img"
+            style={{
+              objectFit: "cover",
+              borderRadius: "15px",
+            }}
+            onError={(e) => {
+              e.target.onerror = null;
+            }}
           />
         ) : null}
-
         {like ? (
           <button className="card-heart">
             <img src={heart} alt="heart" className="card__heart" />

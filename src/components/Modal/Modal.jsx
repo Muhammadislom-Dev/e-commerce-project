@@ -7,7 +7,7 @@ import { UserIcon } from "../../assets/icon";
 import "./Modal.css";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
-import { LoginImage } from "../../assets/img";
+import { ObjectIcon } from "../../assets/icon";
 import { Link } from "react-router-dom";
 
 const style = {
@@ -83,7 +83,7 @@ export default function LoginModal() {
               )}
             </div>
             <div className="modal-right">
-              <img src={LoginImage} className="modal-img" alt="" />
+              <img src={ObjectIcon} className="modal-img" alt="" />
             </div>
           </div>
         </Box>

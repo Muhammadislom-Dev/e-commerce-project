@@ -9,6 +9,7 @@ export const registerUser = async (userData, setCode) => {
   const response = await axios
     .post(`${API_BASE_URL}/auth/v1/register`, userData)
     .then((res) => {
+      toast.success("Telefon raqamingizga tasdiqlash uchun sms yuborildi!");
       if (res.status === 200) {
         setCode(true);
       }
@@ -17,10 +18,44 @@ export const registerUser = async (userData, setCode) => {
   return response.data;
 };
 
-export const PhoneSmsCode = async (userData, navigate, handleClose) => {
+export const editUserPost = async (userData, setOpen) => {
+  const response = await axios
+    .post(`${API_BASE_URL}/auth/v1/editMe`, userData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      toast.success("Telefon raqamingizga tasdiqlash uchun sms yuborildi!");
+      if (res.status === 200) {
+        setOpen(true);
+      }
+      // localStorage.setItem("token", `${res?.data?.objectKoinot?.token}`);
+    });
+  return response.data;
+};
+
+export const loginUser = async (userData, setCode) => {
+  const response = await axios
+    .post(`${API_BASE_URL}/auth/v1/login`, userData)
+    .then((res) => {
+      toast.success("Siz muvaffaqiyatli login qildingiz!");
+      if (res.status === 200) {
+        setCode(true);
+      }
+      localStorage.setItem(
+        "accessToken",
+        `${res?.data?.objectKoinot?.accessToken}`
+      );
+    });
+  return response.data;
+};
+
+export const PhoneSmsCode = async (userData, handleClose) => {
   const response = await axios
     .post(`${API_BASE_URL}/auth/v1/verify`, userData)
     .then((res) => {
+      toast.success("Tabriklaymiz siz ro'yhatdan o'tdingiz!");
       localStorage.setItem(
         "accessToken",
         `${res?.data?.objectKoinot?.accessToken}`
@@ -46,16 +81,14 @@ export const getCategory = async () => {
 };
 
 export const uploadImage = async (image) => {
-  const response = await axios.post(
-    `${API_BASE_URL}/attachment/v1/upload-photo`,
-    image,
-    {
+  const response = await axios
+    .post(`${API_BASE_URL}/attachment/v1/upload-photo`, image, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         "Content-Type": "multipart/form-data",
       },
-    }
-  );
+    })
+    .then((res) => toast.success("Muvaffaqiyatli rasm yuklandi!"));
   return response.data;
 };
 

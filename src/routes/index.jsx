@@ -53,7 +53,6 @@ function AppRoutes() {
         <Route path="/profile" element={<>{token ? <Profile /> : ""}</>} />
         <Route path="/product/:id" element={<Product />} />
       </Routes>
-      {/* {token ? <PrivateRoutes /> : <PublicRoutes />} */}
     </>
   );
 }

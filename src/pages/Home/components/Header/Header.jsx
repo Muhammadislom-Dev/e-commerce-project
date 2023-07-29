@@ -3,7 +3,6 @@ import "./Header.css";
 import { SearchIcon } from "../../../../assets/icon";
 import { data } from "./data";
 import { Link } from "react-router-dom";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -11,9 +10,9 @@ import { useQuery } from "react-query";
 import { fetchDistrictData, fetchRegionData } from "../../../../api";
 import { Box, CircularProgress } from "@mui/material";
 
-function Header({ code, setCode, setSearch, handleClear }) {
-  const [age, setAge] = React.useState("");
-  const [district, setDistrict] = useState(null);
+function Header({ code, setCode, setSearch, handleClear,age,setAge }) {
+  
+  const [district, setDistrict] = useState("Shahar");
   const handleChange = (event) => {
     setAge(event?.target?.value);
     setCode(event?.target?.value);

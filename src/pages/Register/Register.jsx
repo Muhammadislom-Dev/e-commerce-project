@@ -6,7 +6,7 @@ import SmsCode from "../SmsCode/SmsCode";
 
 function Register({ handleClose }) {
   const [formData, setFormData] = useState({
-    phoneNumber: "",
+    phoneNumber: "998",
   });
   const [code, setCode] = useState(false);
   const mutation = useMutation((userData) => registerUser(userData, setCode));
@@ -48,7 +48,7 @@ function Register({ handleClose }) {
               joylashtirish uchun javobgarligimni tasdiqlayman.
             </p>
             <div className="register-label">
-              <input type="checkbox" />
+              <input required type="checkbox" />
               <p>
                 Ha, men Tekin Market dagi yangiliklar va aksiyalar haqida
                 ma’lumot olishni xohlayman.

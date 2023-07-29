@@ -109,6 +109,14 @@ width: 350px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  transition: 0.3s;
+  border: 2px solid #fbd1cb;
+}
+
+.navbar-submit:hover {
+  color: #f26957;
+  border: 2px solid #f26957;
+  background-color: transparent;
 }
 
 .navbar-category {
@@ -164,5 +172,4 @@ width: 350px;
   .responsiveNavbar {
     display: flex;
   }
-}
 
