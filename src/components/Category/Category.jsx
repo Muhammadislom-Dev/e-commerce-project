@@ -13,7 +13,7 @@ import baby from "../../assets/category-icons/baby.svg";
 export default function Category({ setisCategory }) {
   const [activeCategory, setactiveCategory] = useState(1);
   const { data } = useQuery("get category", getCategory);
-  console.log(data);
+  // console.log(activeCategory);
   const icons = [clothes, electronic, transport, cat, baby];
 
   return (
@@ -28,8 +28,7 @@ export default function Category({ setisCategory }) {
                   activeCategory === el.id
                     ? "category-section-main-item category-section-main-item-active"
                     : "category-section-main-item"
-                }
-              >
+                }>
                 <img src={icons[index]} alt="icon" />
                 <span>{el.nameUz}</span>
                 <SlArrowRight />
@@ -47,11 +46,10 @@ export default function Category({ setisCategory }) {
                 <NavLink
                   onClick={() => setisCategory(false)}
                   key={el.id}
-                  to={`/${el.nameUz}`}
+                  to={`/${activeCategory}`}
                   style={({ isActive }) =>
                     isActive ? { color: "#F26957" } : { color: "#000" }
-                  }
-                >
+                  }>
                   <li className="category-section-secondary-item">
                     <SlArrowRight />
                     <span>{el.nameUz}</span>

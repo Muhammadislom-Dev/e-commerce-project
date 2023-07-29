@@ -41,6 +41,7 @@ function Navbar() {
           <Language />
           <LoginModal />
           <Link to="/profile" className="navbar-submit">
+            <span>+</span>
             E’lon berish
           </Link>
         </div>

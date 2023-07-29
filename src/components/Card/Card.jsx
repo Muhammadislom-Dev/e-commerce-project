@@ -33,7 +33,6 @@ const Card = ({ data, key, like }) => {
       </Box>
     );
   }
-  console.log(data);
   return (
     <>
       <div key={key} className="card">

@@ -10,9 +10,9 @@ import { useQuery } from "react-query";
 import { fetchDistrictData, fetchRegionData } from "../../../../api";
 import { Box, CircularProgress } from "@mui/material";
 
-function Header({ code, setCode, setSearch, handleClear }) {
-  const [age, setAge] = React.useState("");
-  const [district, setDistrict] = useState(null);
+function Header({ code, setCode, setSearch, handleClear,age,setAge }) {
+  
+  const [district, setDistrict] = useState("Shahar");
   const handleChange = (event) => {
     setAge(event?.target?.value);
     setCode(event?.target?.value);
@@ -62,7 +62,7 @@ function Header({ code, setCode, setSearch, handleClear }) {
               id="demo-simple-select"
               value={age}
               onChange={handleChange}>
-              <MenuItem onClick={handleClear} value="">
+              <MenuItem onClick={handleClear} value={age}>
                 Barchasi
               </MenuItem>
               {region.objectKoinot.content.map((data) => (
@@ -78,6 +78,7 @@ function Header({ code, setCode, setSearch, handleClear }) {
               id="demo-simple-select"
               value={district}
               onChange={handleDistrict}>
+              <MenuItem value="Shahar">Shahar</MenuItem>
               {districtData?.objectKoinot?.content?.map((data) => (
                 <MenuItem key={data.id} value={data.id}>
                   {data.name}

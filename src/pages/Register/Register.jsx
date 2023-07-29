@@ -34,7 +34,6 @@ function Register({ handleClose }) {
               <input
                 type="text"
                 id="phoneNumber"
-                defaultValue=""
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}

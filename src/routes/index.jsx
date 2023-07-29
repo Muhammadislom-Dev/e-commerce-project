@@ -16,7 +16,7 @@ function AppRoutes() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route
+        <Route
           path="/blog/about/:id"
           element={
             <>
@@ -33,25 +33,25 @@ function AppRoutes() {
               <BlogAbout />
             </>
           }
-        /> */}
-        {/* <Route
+        />
+        <Route
           path="/like"
           element={
             <>
               <LikePage />
             </>
           }
-        /> */}
-        {/* <Route
+        />
+        <Route
           path="/products/about/:id"
           element={
             <>
               <AboutProduct />
             </>
           }
-        /> */}
-        {/* <Route path="/profile" element={<>{token ? <Profile /> : ""}</>} />
-        <Route path="/product/:id" element={<Product />} /> */}
+        />
+        <Route path="/profile" element={<>{token ? <Profile /> : ""}</>} />
+        <Route path="/product/:id" element={<Product />} />
       </Routes>
     </>
   );
