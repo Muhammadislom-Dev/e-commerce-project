@@ -38,11 +38,13 @@ function BlogPage() {
   return (
     <div className="container">
       <div className="bloks">
+        <div className="bloks__imgBox">
         <img
           className="blog-about-img"
           src={newData?.photo?.filePath}
           alt="images1"
         />
+        </div>
         <div className="blok__section">
           <div className="blok__section_left">
             <h2 className="blok__section_title">Blog</h2>

@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+html {
+  box-sizing: border-box;
 }
 
 code {
@@ -13,13 +19,14 @@ code {
 }
 
 .container {
-  width: 100%;
-  max-width: 1320px;
+  max-width: 1350px;
   margin: 0 auto;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
 * {
   text-decoration: none;
   list-style: none;
+  box-sizing: border-box;
 }
