@@ -3,7 +3,6 @@ import "./Header.css";
 import { SearchIcon } from "../../../../assets/icon";
 import { data } from "./data";
 import { Link } from "react-router-dom";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
