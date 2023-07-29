@@ -1,13 +1,21 @@
 .bloks {
-  width: 1010px;
+  max-width: 1010px;
   margin: 0 auto;
   margin-top: 48px;
+  /* border: 1px solid red; */
+}
+
+.bloks__imgBox {
+  max-width: 1010px;
+  height: 347px;
 }
 
 .blok__section {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-top: 6px;
 }
 
@@ -27,6 +35,10 @@
   font-weight: 400;
   line-height: 16px;
   cursor: pointer;
+}
+
+.blok__titels {
+  max-width: 1010px;
 }
 
 .blok__section_timer {
@@ -58,8 +70,8 @@
 }
 
 .blog-about-img {
-  width: 1010px;
-  height: 347px;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
 }
 
@@ -86,7 +98,7 @@
 }
 
 .titels_donation {
-  width: 804px;
+  width: 100%;
   color: #000;
   font-family: Archivo;
   font-size: 40px;
@@ -96,13 +108,14 @@
 }
 
 .titels__light {
-  width: 924px;
+  width: 100%;
   color: var(--foundation-grey-normal, #232323);
   font-family: Archivo;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: 30px;
+
 }
 
 .titels__maqola {
@@ -111,9 +124,11 @@
   font-size: 24px;
   font-weight: 600;
   line-height: 34px;
+  
 }
 
 .titles__heshteg {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -122,6 +137,7 @@
 }
 
 .heshteg__left {
+  width: 100%;
   color: #0c82ee;
   font-family: Archivo;
   font-size: 14px;
@@ -135,4 +151,17 @@
   font-size: 14px;
   font-weight: 400;
   cursor: pointer;
+}
+
+
+@media (max-width: 730px) {
+  .titels_donation {
+    font-size: 28px;
+    line-height: 38px;
+  }
+
+  .titels__light {
+    font-size: 17px;
+    line-height: 28px;
+  }
 }

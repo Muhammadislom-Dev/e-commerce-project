@@ -7,6 +7,9 @@ import {
   LogoIcon,
 } from "../../assets/icon";
 import { Link } from "react-router-dom";
+import { RiHome7Line } from "react-icons/ri";
+import { BiCategory, BiHomeAlt2, BiUser } from "react-icons/bi";
+import { BsHeart, BsPlusCircleFill } from "react-icons/bs";
 import LoginModal from "../Modal/Modal";
 import Language from "../Language/Language";
 import Category from "../Category/Category";
@@ -15,6 +18,41 @@ function Navbar() {
   const [isCategory, setisCategory] = useState(false);
   return (
     <div className="navbar">
+      <div className="responsiveNavbar">
+        <div className="container fixedContainer">
+          <div className="fixedNav">
+            <div className="fixedNavIconBox">
+              <Link to="/" className="fixed-navbar-Ic">
+                <BiHomeAlt2 className="fixNavIconL" />
+                <h4>Bosh sahifa</h4>
+              </Link>
+            </div>
+            <div className="fixedNavIconBox">
+              <Link to="/" className="fixed-navbar-Ic">
+                <BiCategory className="fixNavIconL" />
+                <h4>Kategoriya</h4>
+              </Link>
+            </div>
+            <div className="fixedNavIconBox plus">
+              <Link to="/" className="fixed-navbar-Ic">
+                <BsPlusCircleFill className="plusIconFixNAv" />
+              </Link>
+            </div>
+            <div className="fixedNavIconBox">
+              <Link to="/" className="fixed-navbar-Ic">
+                <BsHeart className="fixNavIconL" />
+                <h4>Tanlanganlar</h4>
+              </Link>
+            </div>
+            <div className="fixedNavIconBox">
+              <Link to="/" className="fixed-navbar-Ic">
+                <BiUser className="fixNavIconL" />
+                <h4>Profile</h4>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
       {isCategory ? <Category setisCategory={setisCategory} /> : null}
       <div className="container">
         <div className="navbar-left">

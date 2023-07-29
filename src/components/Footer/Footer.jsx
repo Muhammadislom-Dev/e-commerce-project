@@ -1,16 +1,13 @@
 import React from "react";
+import { FacebookIcon, InstagramIcon, TekinMarket, TelegramIcon } from "../../assets/icon";
 import "./Footer.css";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  TekinMarket,
-  TelegramIcon,
-} from "../../assets/icon";
+
 
 function Footer() {
   return (
     <div className="footer">
       <div className="container">
+      <div className="footer-flex">
         <img src={TekinMarket} alt="" className="footer-img" />
         <div className="footer-list">
           <div className="footer-left">
@@ -54,6 +51,17 @@ function Footer() {
               </li>
             </ul>
           </div>
+          <div className="footer-bottom">
+          <a href="#" className="footer-links">
+            <img src={FacebookIcon} alt="" className="footer-icon" />
+          </a>
+          <a href="#" className="footer-links">
+            <img src={TelegramIcon} alt="" className="footer-icon" />
+          </a>
+          <a href="#" className="footer-links">
+            <img src={InstagramIcon} alt="" className="footer-icon" />
+          </a>
+        </div>
           <div className="footer-right">
             <h4 className="footer-name">Obuna bo‘ling</h4>
             <p className="footer-text">
@@ -70,7 +78,7 @@ function Footer() {
             </label>
           </div>
         </div>
-        <div className="footer-bottom">
+        <div className="footer-bottomlast">
           <a href="#" className="footer-links">
             <img src={FacebookIcon} alt="" className="footer-icon" />
           </a>
@@ -85,6 +93,7 @@ function Footer() {
         <p className="footer-texts">
           © 2023 - Tekin Market Barcha huquqlar ximoyalangan
         </p>
+      </div>
       </div>
     </div>
   );

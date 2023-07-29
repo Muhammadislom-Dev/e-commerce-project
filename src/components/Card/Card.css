@@ -5,6 +5,7 @@
   background: rgb(230, 227, 227);
   position: relative;
   font-family: "Archivo", sans-serif;
+  margin-top: 15px;
 }
 
 .card > img {

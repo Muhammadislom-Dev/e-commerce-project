@@ -40,7 +40,9 @@ function Blog() {
           {data?.objectKoinot?.content?.map((blog) => (
             <div className="blog-item" key={blog.id}>
               <Link to={`/blog/about/${blog.id}`}>
+                <div className="blog-img-box">
                 <img src={blog.photo?.filePath} alt="" className="blog-img" />
+                </div>
                 <h5 className="blog-names">{blog.name}</h5>
                 <p className="blog-text">{blog.description}</p>
                 <p className="blog-time">{blog.time}</p>

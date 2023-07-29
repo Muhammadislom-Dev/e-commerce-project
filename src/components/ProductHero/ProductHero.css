@@ -10,6 +10,7 @@
   background: url("../../assets/product-hero-bg1.svg"), url("../../assets/product-hero-bg1.svg"), url("../../assets/product-hero-bg2.svg"), linear-gradient(130deg, #61C1B9 0%, #ED6C5A 100%);
   background-repeat: no-repeat;
   background-position: bottom left, bottom -150px left, right top;
+  /* border: 1px solid red; */
 }
 
 .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
