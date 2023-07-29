@@ -18,7 +18,40 @@ export const registerUser = async (userData, setCode) => {
   return response.data;
 };
 
-export const PhoneSmsCode = async (userData, navigate, handleClose) => {
+export const editUserPost = async (userData, setOpen) => {
+  const response = await axios
+    .post(`${API_BASE_URL}/auth/v1/editMe`, userData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+    .then((res) => {
+      toast.success("Telefon raqamingizga tasdiqlash uchun sms yuborildi!");
+      if (res.status === 200) {
+        setOpen(true);
+      }
+      // localStorage.setItem("token", `${res?.data?.objectKoinot?.token}`);
+    });
+  return response.data;
+};
+
+export const loginUser = async (userData, setCode) => {
+  const response = await axios
+    .post(`${API_BASE_URL}/auth/v1/login`, userData)
+    .then((res) => {
+      toast.success("Siz muvaffaqiyatli login qildingiz!");
+      if (res.status === 200) {
+        setCode(true);
+      }
+      localStorage.setItem(
+        "accessToken",
+        `${res?.data?.objectKoinot?.accessToken}`
+      );
+    });
+  return response.data;
+};
+
+export const PhoneSmsCode = async (userData, handleClose) => {
   const response = await axios
     .post(`${API_BASE_URL}/auth/v1/verify`, userData)
     .then((res) => {

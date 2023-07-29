@@ -15,3 +15,4 @@ export { default as CallButton } from "./1.svg";
 export { default as CloseButton } from "./Cross Mark.svg";
 export { default as DeveloperIcon } from "./2.svg";
 export { default as AvatarIcon } from "./avatar.svg";
+export { default as ObjectIcon } from "./OBJECTS.svg";

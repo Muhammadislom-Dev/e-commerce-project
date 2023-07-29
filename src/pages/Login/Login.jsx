@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useMutation } from "react-query";
-import { registerUser } from "../../api";
+import { loginUser } from "../../api";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ function Login() {
     password: "",
   });
   const [code, setCode] = useState(false);
-  const mutation = useMutation((userData) => registerUser(userData, setCode));
+  const mutation = useMutation((userData) => loginUser(userData, setCode));
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +23,7 @@ function Login() {
   return (
     <div>
       <h3 className="register-name">Ro‘yhatdan o‘tish</h3>
-      <form action="" className="register-form">
+      <form onSubmit={handleSubmit} action="" className="register-form">
         <label htmlFor="">
           Telefon raqam
           <input
