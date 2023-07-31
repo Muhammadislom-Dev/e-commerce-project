@@ -1,27 +1,41 @@
-.announcement-list {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  padding: 48px 0;
-  gap: 20px;
+.announcement {
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.announcement {
-  margin-left: -35px;
+
+.announcement-list {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  /* display: grid; */
+  /* grid-template-columns: auto auto auto; */
+  padding: 48px 0;
+  /* gap: 20px; */
+  /* border: 2px solid green; */
 }
+
+
+
 
 .announcement-card {
-  width: 400px;
+  max-width: 400px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 12px;
-  gap: 20px;
+  gap: 10px;
   border-radius: 20px;
   background: #f1f1f1;
   position: relative;
+  box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .card__right_title {
-  width: 219px;
+  width: 210px;
   color: var(--foundation-grey-normal, #232323);
   font-family: Archivo;
   font-size: 16px;

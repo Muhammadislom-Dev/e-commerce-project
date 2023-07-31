@@ -49,9 +49,10 @@
 }
 
 .setup-btn-wrapper {
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 60px;
+  justify-content: space-between;
 }
 
 .setup-logOut {
@@ -72,4 +73,16 @@
   width: 24px;
   height: 24px;
   color: #FF463A;
+}
+
+@media (max-width: 560px) {
+  .product-create-form-button {
+    padding: 16px 30px;
+    font-size: 15px;
+  }
+
+  .setup-logOut {
+    font-size: 15px;
+    gap: 8px;
+  }
 }

@@ -65,3 +65,10 @@ body .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop{
 .modal-img {
   width: 650px;
 }
+
+
+@media (max-width: 840px) {
+  .navbar-profile {
+    display: none;
+  }
+}

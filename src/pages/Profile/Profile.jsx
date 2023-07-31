@@ -23,7 +23,8 @@ function CustomTabPanel(props) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}>
+      {...other}
+    >
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
@@ -60,7 +61,8 @@ function Profile() {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        height={"80vh"}>
+        height={"80vh"}
+      >
         <CircularProgress
           color="success"
           style={{ width: "100px", height: "100px" }}
@@ -74,21 +76,26 @@ function Profile() {
     <>
       <div className="profile">
         <div className="container">
-          <div className="profile-list">
-            <img
-              src={
-                data.objectKoinot.photo ? data?.objectKoinot?.photo : AvatarIcon
-              }
-              alt=""
-              className="profile-img"
-            />
-            <div className="profile-item">
-              <h3 className="profile-name">User Name</h3>
-              <a
-                href={`tel:+${data?.objectKoinot?.phoneNumber}`}
-                className="profile-number">
-                +{data?.objectKoinot?.phoneNumber}
-              </a>
+          <div className="profileBackground">
+            <div className="profile-list">
+              <img
+                src={
+                  data.objectKoinot.photo
+                    ? data?.objectKoinot?.photo
+                    : AvatarIcon
+                }
+                alt=""
+                className="profile-img"
+              />
+              <div className="profile-item">
+                <h3 className="profile-name">User Name</h3>
+                <a
+                  href={`tel:+${data?.objectKoinot?.phoneNumber}`}
+                  className="profile-number"
+                >
+                  +{data?.objectKoinot?.phoneNumber}
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -101,7 +108,8 @@ function Profile() {
               <Tabs
                 value={value}
                 onChange={handleChange}
-                aria-label="basic tabs example">
+                aria-label="basic tabs example"
+              >
                 <Tab label="E’LONLARIM" {...a11yProps(0)} />
                 <Tab label="E’LON QO’SHISH" {...a11yProps(1)} />
                 <Tab label="SOZLAMALAR" {...a11yProps(2)} />
